@@ -1,0 +1,60 @@
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:newFont="http://schemas.android.com/apk/res/prince.app.ccm"
+    newFont:typeface="RobotoSlab-Regular.ttf"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:divider="?android:dividerHorizontal"
+    android:showDividers="middle"
+    android:background="#D4CFCF">
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        style="?android:buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_retry"
+            style="?android:buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#000000"
+            android:text="@string/Retry" />
+
+        <Button
+            android:id="@+id/btn_check_network"
+            style="?android:buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#000000"
+            android:text="@string/check_connection" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="172dp"
+        android:text="@string/no_network"
+        android:textColor="#000000"
+        android:textSize="22sp" />
+
+</RelativeLayout>

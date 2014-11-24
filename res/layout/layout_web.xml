@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<prince.app.ccm.util.MultiSwipeRefreshLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swiperefresh"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#D4CFCF"
+    android:orientation="vertical" >
+    
+    <FrameLayout
+        android:id="@+id/web_frame"
+        android:layout_width = "match_parent"
+        android:layout_height="match_parent">
+        
+		<ProgressBar
+		    android:id="@+id/web_progress"
+	        style="@android:style/Widget.Holo.ProgressBar.Large"
+	        android:indeterminate="true"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"/>
+	    
+	    <WebView
+	    	android:id= "@+id/text_audio_main"
+	    	android:layout_width="fill_parent"
+	    	android:layout_height="fill_parent"
+	    	android:text="@string/test"
+	    	android:visibility="invisible"
+	    	android:gravity="center_horizontal|center_vertical" />
+    
+    </FrameLayout>
+</prince.app.ccm.util.MultiSwipeRefreshLayout>

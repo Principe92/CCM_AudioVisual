@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">Ajustes</string>
+    <string name="action_logout">Cerrar sessión</string>
+    <string name="action_main_secure">Cerrar sessión</string>
+    <string name="action_main_test">Versión web</string>
+    <string name="action_main_web">Versión web</string>
+    <string name="action_main_personal">Versión personal</string>
+    <string name="action_pop_note">Notas</string>
+    <string name="action_pop_list">Convocados</string>
+    <string name="action_main_refresh">Actualizar</string>
+    <string name="action_main_overflow">options</string>
+    <string name="action_warning_salir">¿Estás seguro que usted quiere salir y cerrar la sessión?</string>
+    
+</resources>

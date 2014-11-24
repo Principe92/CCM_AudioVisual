@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- SCHEDULE -->
+    <PreferenceCategory
+        android:title="@string/pref_schedule_category"
+        android:key="@string/pref_schedule_category_key">
+        <ListPreference 
+            android:key="@string/pref_defaultPage_key"
+            android:summary="@string/pref_defaultPage_summary"
+            android:title="@string/pref_defaultPage_title"
+            android:persistent="true"
+            android:dialogTitle="@string/pref_defaultPage_title"
+            android:negativeButtonText="@string/cancel"
+            android:entries="@array/pref_cacheClearModeEntries"
+            android:entryValues="@array/pref_cacheClearModeValues"
+            android:defaultValue="@string/pref_cacheClearMode_default"/>
+            
+            <EditTextPreference 
+                android:key="@string/pref_videoUrl_key"
+                android:title="@string/pref_videoUrl_title"
+                android:persistent="true"
+                android:negativeButtonText="@string/cancel"
+                android:dialogTitle="@string/pref_videoUrl_dialogTitle"
+                android:defaultValue="@string/pref_videoUrl_defaultValue"
+                android:summary="@string/pref_videoUrl_summary"
+                android:positiveButtonText="@string/save"/>
+            <EditTextPreference 
+                android:key="@string/pref_proyUrl_key"
+                android:title="@string/pref_proyUrl_title"
+                android:persistent="true"
+                android:negativeButtonText="@string/cancel"
+                android:dialogTitle="@string/pref_proyUrl_dialogTitle"
+                android:defaultValue="@string/pref_proyUrl_defaultValue"
+                android:summary="@string/pref_proyUrl_summary"
+                android:positiveButtonText="@string/save"/>
+            <EditTextPreference 
+                android:key="@string/pref_discosUrl_key"
+                android:title="@string/pref_discosUrl_title"
+                android:persistent="true"
+                android:negativeButtonText="@string/cancel"
+                android:dialogTitle="@string/pref_discosUrl_dialogTitle"
+                android:defaultValue="@string/pref_discosUrl_defaultValue"
+                android:summary="@string/pref_discosUrl_summary"
+                android:positiveButtonText="@string/save"/>
+      <!--  <EditTextPreference 
+                android:key="@string/pref_zonasUrl_key"
+                android:title="@string/pref_zonasUrl_title"
+                android:persistent="true"
+                android:negativeButtonText="@string/cancel"
+                android:dialogTitle="@string/pref_zonasUrl_dialogTitle"
+                android:defaultValue="@string/pref_zonasUrl_defaultValue"
+                android:summary="@string/pref_zonasUrl_summary"
+                android:positiveButtonText="@string/save"/> -->
+    </PreferenceCategory>
+    
+    <!-- DEVELOPER -->
+	<PreferenceCategory
+        android:title="@string/pref_developer_title"
+        android:key="@string/pref_developer_key">
+        
+	    <Preference 
+            android:key="@string/pref_app_version_key"
+            android:title="@string/pref_app_version_title"/>
+	    
+	</PreferenceCategory>
+</PreferenceScreen>

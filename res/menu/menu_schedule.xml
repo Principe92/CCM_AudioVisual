@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <!-- Refresh -->
+    <item android:id="@+id/action_main_refresh"
+          android:icon="@drawable/ic_action_refresh"
+          android:title="@string/action_main_refresh"
+          app:showAsAction="ifRoom" />
+    
+	<!-- settings, should appear as action button -->
+    <item 
+        android:id="@+id/action_settings"	
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+    
+    <!-- settings, should appear as action button -->
+    <item 
+        android:id="@+id/action_web"	
+        android:title="@string/action_main_web"
+        app:showAsAction="never" />
+    
+    <!-- LogOut, should always be in the overflow -->
+    <item android:id="@+id/action_main_log"
+          android:icon="@drawable/ic_action_secure"
+          android:title="@string/action_main_secure"
+          app:showAsAction="never" />
+    
+     
+</menu>

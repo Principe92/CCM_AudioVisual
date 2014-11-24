@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/schedule_color">
+
+    <!-- Role -->
+
+    <TextView
+        android:id="@+id/text_role_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_role"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_toEndOf="@+id/text_role"
+        android:layout_toRightOf="@+id/text_role"
+        android:text="@string/unknown"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+	
+    <!-- Date -->
+
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_role"
+        android:layout_alignStart="@+id/text_role"
+        android:layout_below="@+id/text_role"
+        android:layout_marginTop="24dp"
+        android:text="@string/text_date"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_date_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_date"
+        android:layout_alignLeft="@+id/text_role_entry"
+        android:layout_alignStart="@+id/text_role_entry"
+        android:layout_toEndOf="@+id/text_date"
+        android:layout_toRightOf="@+id/text_date"
+        android:text="@string/unknown"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <!-- Last Updated -->
+
+    <TextView
+        android:id="@+id/text_last_updated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_date"
+        android:layout_alignStart="@+id/text_date"
+        android:layout_below="@+id/text_date"
+        android:layout_marginTop="25dp"
+        android:text="@string/text_last_updated"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_last_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_last_updated"
+        android:layout_alignLeft="@+id/text_role_entry"
+        android:layout_alignStart="@+id/text_role_entry"
+        android:layout_toEndOf="@+id/text_last_updated"
+        android:layout_toRightOf="@+id/text_last_updated"
+        android:text="@string/unknown"
+        android:textColor="@color/red"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_last_updated"
+        android:layout_alignStart="@+id/text_last_updated"
+        android:layout_below="@+id/text_last_updated"
+        android:layout_marginTop="25dp"
+        android:text="@string/text_notes"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_note_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_note"
+        android:layout_alignLeft="@+id/text_role_entry"
+        android:layout_alignStart="@+id/text_role_entry"
+        android:layout_toEndOf="@+id/text_note"
+        android:layout_toRightOf="@+id/text_note"
+        android:text="@string/text_note_on"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_role"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/text_turn"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/text_turn"
+        android:layout_toRightOf="@+id/text_turn"
+        android:text="@string/text_role"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_edition_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/text_turn"
+        android:layout_alignLeft="@+id/text_turn"
+        android:layout_alignRight="@+id/text_turn"
+        android:layout_alignStart="@+id/text_turn"
+        android:layout_below="@+id/text_turn"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/text_edition_number"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/text_turn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/circle"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/text_turn"
+        android:textSize="100sp" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_note_entry"
+        android:layout_marginLeft="58dp"
+        android:layout_marginStart="58dp"
+        android:layout_toEndOf="@+id/text_edition_number"
+        android:layout_toRightOf="@+id/text_note_entry"
+        android:background="@null"
+        android:contentDescription="@string/options"
+        android:onClick="showPopup"
+        android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha" />
+
+</RelativeLayout>

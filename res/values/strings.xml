@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CCM AudioVisual</string>
+    <string name="drawer_photo">cover photo</string>
+    <string name="test">Schedule</string>
+    <string name="drawer_open">open drawer</string>
+    <string name="drawer_close">close drawer</string>
+
+    <string-array name="array_turnos">
+        <item>Grabación Palma</item>
+        <item>Proyección Palma</item>
+        <item>Discos Palma</item>
+    </string-array>
+    
+    <string-array name="array_navigation">
+        <item>Turnos</item>
+        <item>Lectura</item>
+    </string-array>
+    
+    <string-array name="actionBarTitles">
+        <item>Grabación</item>
+        <item>Proyección</item>
+        <item>Discos</item>
+        <item>Zonas</item>
+    </string-array>
+
+    <string name="retry">Reintentar</string>
+    <string name="check_connection">Comprobar</string>
+    <string name="no_internet_image">No Internet</string>
+    <string name="load_pdf">Abrir archivo</string>
+    <string name="title_activity_visual">VisualActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="no_network">Error de conexión</string>
+    <string name="Retry">Reintentar</string>
+    <string name="image">imagen</string>
+    
+    <string name="pdf_header">Error abriendo archivo</string>
+    <string name="pdf_positive">Si</string>
+    <string name="pdf_negative">No</string>
+    <string name="pdf_message">No existe una applicación en tu dispositivo para ver el archivo. \n¿Quieres instalar uno de Google Play?</string>
+    
+    <!-- Activity Titles -->
+    <string name="title_activity_log">Autenticación</string>
+    <string name="title_activity_settings">Ajustes</string>
+    
+    <string name="text_edition_number">Noviembre 13, 2014</string>
+    <string name="text_turn">1</string>
+    <string name="text_role">Papel:</string>
+    <string name="text_last_updated">Actualizado:</string>
+    <string name="text_date">Edicción:</string>
+    <string name="text_notes">Evento:</string>
+    <string name="text_note_see">Ver</string>
+    <string name="text_note_on">Hay notas</string>
+    <string name="text_note_off">No hay notas</string>
+    <string name="unknown">Ninguno</string>
+    <string name="options">opciones</string>
+
+</resources>

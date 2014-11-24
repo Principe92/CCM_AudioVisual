@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <style name="AppThemeBase" parent="Theme.AppCompat">
+        <item name="android:actionBarStyle">@style/customActionBar</item>
+        
+        <item name="actionBarStyle">@style/customActionBar</item>
+        <item name="colorPrimary">@color/colorPrimary_500</item>
+    	<item name="colorPrimaryDark">@color/colorPrimary_700</item>
+    	<item name="colorAccent">@color/colorPrimaryAccent</item>
+    </style>
+    
+    <style name="customActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/colorPrimary_500</item>
+        
+        <item name="background">@color/colorPrimary_500</item>
+    </style>
+        
+    <style name="AppThemeBase.ScheduleTheme" >
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="Main" parent="Theme.AppCompat.NoActionBar"></style>
+
+    <style name="Transparent" parent="@android:style/Theme.Holo">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="LoginFormContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+</resources>
