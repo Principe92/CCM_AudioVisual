@@ -12,4 +12,7 @@
     <string name="action_main_overflow">options</string>
     <string name="action_warning_salir">¿Estás seguro que usted quiere salir y cerrar la sessión?</string>
     
+    <!-- Turnos -->
+    <string name="action_turnos_contact">Ayuda</string>
+    
 </resources>

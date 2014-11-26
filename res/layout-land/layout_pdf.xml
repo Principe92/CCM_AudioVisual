@@ -8,14 +8,14 @@
         android:id="@+id/load_pdf"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
+        android:layout_below="@+id/image_card"
         android:background="#745b32"
         android:textColor="#ffffff"
         android:layout_centerHorizontal="true"
         android:text="@string/load_pdf" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/image_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

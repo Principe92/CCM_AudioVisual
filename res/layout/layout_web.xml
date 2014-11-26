@@ -7,26 +7,42 @@
     android:background="#D4CFCF"
     android:orientation="vertical" >
     
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/web_frame"
         android:layout_width = "match_parent"
         android:layout_height="match_parent">
-        
-		<ProgressBar
-		    android:id="@+id/web_progress"
-	        style="@android:style/Widget.Holo.ProgressBar.Large"
-	        android:indeterminate="true"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center"/>
 	    
 	    <WebView
 	    	android:id= "@+id/text_audio_main"
 	    	android:layout_width="fill_parent"
 	    	android:layout_height="fill_parent"
 	    	android:text="@string/test"
-	    	android:visibility="invisible"
+	    	android:visibility="gone"
 	    	android:gravity="center_horizontal|center_vertical" />
+
+	    <ProgressBar
+	        android:id="@+id/web_progress"
+	        style="@android:style/Widget.Holo.ProgressBar.Large"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_centerVertical="true"
+	        android:indeterminate="true" />
+
+	    <ImageButton
+	        android:id="@+id/btn_contact_call"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentEnd="true"
+	        android:layout_marginBottom="28dp"
+	        android:layout_marginRight="28dp"
+	        android:layout_marginEnd="28dp"
+	        android:contentDescription="@string/options"
+	        android:background="@drawable/circle"
+	        android:visibility="gone"
+	        android:src="@drawable/ic_add_white_24dp"/>
     
-    </FrameLayout>
+    </RelativeLayout>
 </prince.app.ccm.util.MultiSwipeRefreshLayout>

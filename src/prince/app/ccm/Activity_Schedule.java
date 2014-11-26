@@ -275,4 +275,10 @@ public class Activity_Schedule extends ActivityBase implements OnItemSelectedLis
 		
 	}
 
+	@Override
+	public void actionBarRefresh() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

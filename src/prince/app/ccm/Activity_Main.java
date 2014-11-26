@@ -294,7 +294,8 @@ Network.clickListener, LoadPDF.LoadListener, Fragment_Web.WebListener{
 	
 	
 	/** task to undergo when refresh button is pressed */
-	private void actionBarRefresh(){
+	@Override
+	public void actionBarRefresh(){
 		if (mLastClicked == 3){
 			// create a pdf file
 			Tool.ZONAS = Tool.createFile("zonas.pdf");

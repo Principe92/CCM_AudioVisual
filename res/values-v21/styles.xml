@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<style name="AppThemeBase" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:colorPrimary">@color/colorPrimary_500</item>
-    	<item name="android:colorPrimaryDark">@color/colorPrimary_700</item>
-    	<item name="android:colorAccent">@color/colorPrimaryAccent</item>
+        <item name="android:colorPrimary">@color/red_500</item>
+    	<item name="android:colorPrimaryDark">@color/red_700</item>
+    	<item name="android:colorAccent">@color/red_accent</item>
     </style>
     
 	 <style name="AppThemeBase.ScheduleTheme" >

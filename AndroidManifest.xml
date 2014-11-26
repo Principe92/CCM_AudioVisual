@@ -6,14 +6,14 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="21"/>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="prince.app.ccm.tools.Tool"
+        android:name=".tools.Tool"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/launcher"
@@ -34,7 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <!-- Main Activity -->
         <activity
             android:name=".Activity_Turnos"
@@ -43,7 +43,7 @@
             android:theme="@style/AppThemeBase.ScheduleTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
-        
+
         <!-- LogIn Activity -->
         <activity
             android:name=".Activity_Log"
@@ -53,13 +53,19 @@
             android:theme="@style/AppThemeBase"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
-        
+
         <!-- Settings activity -->
         <activity
             android:name=".SettingsActivity"
+            android:icon="@drawable/launcher"
             android:label="@string/title_activity_settings"
-            android:theme="@style/AppThemeBase" 
-            android:icon="@drawable/launcher"/>
+            android:theme="@style/AppThemeBase.settingsTheme" />
+        
+        <activity
+            android:name=".Activity_Manuals"
+            android:theme="@style/AppThemeBase.ScheduleTheme" 
+            android:label="@string/title_activity_activity__help" >
+        </activity>
     </application>
 
 </manifest>

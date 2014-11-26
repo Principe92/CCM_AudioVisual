@@ -1,22 +1,18 @@
 package prince.app.ccm;
 
 import prince.app.ccm.tools.ActivityBase;
-import prince.app.ccm.tools.AlertDialogX;
 import prince.app.ccm.tools.Tool;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -47,11 +43,13 @@ public class Activity_Turnos extends ActivityBase implements Fragment_Web.WebLis
 	private String mFirstShown;
 	private SharedPreferences mPreference;
 	private int mSpinnerLast;
+	private static String TITLE;
 	
 	@Override
 	public void onCreate(Bundle savedState){
 		super.onCreate(savedState);
 		setContentView(R.layout.layout_turnos);
+		TITLE = getResources().getStringArray(R.array.array_navigation)[0];
 	
 		// initialize default variables
 		initDefaults();
@@ -165,7 +163,7 @@ public class Activity_Turnos extends ActivityBase implements Fragment_Web.WebLis
 		}
 	}
 	
-	@Override
+/*	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_turnos, menu);
 		return true;
@@ -181,6 +179,13 @@ public class Activity_Turnos extends ActivityBase implements Fragment_Web.WebLis
 		
 		if (itemId == R.id.action_main_refresh) {
 			actionBarRefresh();
+			return true;
+		}
+		
+		if (itemId == R.id.action_turnos_help) {
+			Intent intent = new Intent();
+	        intent.setClass(this, Activity_Manuals.class);
+	        startActivity(intent); 
 			return true;
 		}
 		
@@ -207,10 +212,11 @@ public class Activity_Turnos extends ActivityBase implements Fragment_Web.WebLis
 		else {
 			return super.onOptionsItemSelected(item);
 		}
-	}
+	} */
 	
 	/** task to undergo when refresh button is pressed */
-	private void actionBarRefresh(){
+	@Override
+	public void actionBarRefresh(){
 		if (Tool.getInstance().isConnection()){
 			Fragment_Web webPage = (Fragment_Web) getSupportFragmentManager().findFragmentByTag(WEB_TAG);
 			if (webPage != null) webPage.refreshPage();
@@ -265,12 +271,6 @@ public class Activity_Turnos extends ActivityBase implements Fragment_Web.WebLis
 		// TODO Auto-generated method stub
 		
 	}
-	
-	@Override
-	public void navigationSwitch(int position) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public Toolbar getToolBar() {
@@ -280,7 +280,7 @@ public class Activity_Turnos extends ActivityBase implements Fragment_Web.WebLis
 	@Override
 	public String getActionBarTitle() {
 		// TODO Auto-generated method stub
-		return "Turnos";
+		return TITLE;
 	}
 
 	@Override

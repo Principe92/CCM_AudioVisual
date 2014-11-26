@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     
-    <style name="AppThemeBase" parent="Theme.AppCompat">
+    <style name="AppThemeBase" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/customActionBar</item>
+        <item name="android:windowDisablePreview">true</item>
         
         <item name="actionBarStyle">@style/customActionBar</item>
-        <item name="colorPrimary">@color/colorPrimary_500</item>
-    	<item name="colorPrimaryDark">@color/colorPrimary_700</item>
-    	<item name="colorAccent">@color/colorPrimaryAccent</item>
+        <item name="colorPrimary">@color/deeporange_500</item>
+    	<item name="colorPrimaryDark">@color/deeporange_700</item>
+    	<item name="colorAccent">@color/deeporange_accent</item>
     </style>
     
-    <style name="customActionBar" parent="@style/Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/colorPrimary_500</item>
+    <style name="customActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
+        <item name="android:background">@color/deeporange_500</item>
         
-        <item name="background">@color/colorPrimary_500</item>
+        <item name="background">@color/deeporange_500</item>
+    </style>
+    
+    <style name="AppThemeBase.settingsTheme">
+        <item name="android:textColor">@color/grey_900</item>
+        <item name="android:textAppearance">@color/grey_900</item>
     </style>
         
     <style name="AppThemeBase.ScheduleTheme" >

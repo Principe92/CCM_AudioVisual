@@ -5,7 +5,7 @@
     android:background="#ffffff" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/image_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -18,7 +18,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/imageView1"
+        android:layout_alignRight="@+id/image_card"
         android:layout_marginBottom="32dp"
         android:layout_marginRight="61dp"
         android:text="@string/retry" />
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/retry"
         android:layout_alignBottom="@+id/retry"
-        android:layout_alignLeft="@+id/imageView1"
+        android:layout_alignLeft="@+id/image_card"
         android:layout_marginLeft="62dp"
         android:text="@string/check_connection" />
 

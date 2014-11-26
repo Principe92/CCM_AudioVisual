@@ -141,7 +141,7 @@
         android:textSize="100sp" />
 
     <ImageButton
-        android:id="@+id/imageButton1"
+        android:id="@+id/btn_contact_call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/text_note_entry"

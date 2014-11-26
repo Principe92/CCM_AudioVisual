@@ -5,15 +5,10 @@
     android:visible="true">
     
     <size 
-        android:width="200dp"
-        android:height="200dp"/>
+        android:width="60dp"
+        android:height="60dp"/>
     
     <solid 
-        android:color="#007f00"/>
-    
-    <gradient
-        android:startColor="#006400"
-        android:endColor="#66a266"
-        android:angle="45"/>
+        android:color="@color/deeporange_700"/>
     
 </shape>

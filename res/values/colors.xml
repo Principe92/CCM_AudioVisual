@@ -35,12 +35,25 @@
     <color name="swipe_color_4">#00384C</color>
     <color name="swipe_color_5">#0BA0DC</color>
     
-    <color name="colorPrimary_500">#F44336</color>
-	<color name="colorPrimary_700">#D32F2F</color>
-	<color name="colorPrimary_100">#FFCDD2</color> 
-	<color name="colorPrimaryAccent">#FF5252</color>
+    <!-- Red -->
+    <color name="red_500">#F44336</color>
+	<color name="red_700">#D32F2F</color>
+	<color name="red_100">#FFCDD2</color> 
+	<color name="red_accent">#FF5252</color>
 	<color name="red">#CD0000</color>
 	
+	<!-- Deep Orange -->
+	<color name="deeporange_500">#FF5722</color>
+	<color name="deeporange_700">#E64A19</color>
+	<color name="deeporange_100">#FFCCBC</color> 
+	<color name="deeporange_accent">#FF3D00</color>
+	
+	<color name="grey_50">#FAFAFA</color>
+	<color name="grey_900">#212121</color>
+	
+	<color name="teal_500">#009688</color>
+	
+	<color name="lightblue_500">#03A9F4</color>
 	<color name="schedule_color">#CDC8B1</color>
 
 </resources>

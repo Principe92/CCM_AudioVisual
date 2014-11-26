@@ -32,7 +32,7 @@ public class Tool extends Application{
 	public static File PROJECTION;
 	public static File ZONAS;
 	public static String dir = Environment.getExternalStorageDirectory().getAbsolutePath();
-	
+	public static boolean EXIT_TASK;
 	/**
 	 * An Array containing each column in the schedule table
 	 */
@@ -43,6 +43,8 @@ public class Tool extends Application{
 	 */
 	public static SparseArray<VideoRow> mVideoRowArray;
 	
+	public static File APP_DIR;
+	
 	@Override
 	public void onCreate(){
 		super.onCreate();
@@ -50,6 +52,9 @@ public class Tool extends Application{
 		
 		mVideoColumnArray = new SparseArray<VideoColumn>();
 		mVideoRowArray = new SparseArray<VideoRow>();
+		
+		APP_DIR = new File(Tool.dir, "CCM AudioVisual");
+		APP_DIR.mkdirs();
 		
 		// set preference to default values
 		PreferenceManager.setDefaultValues(this, R.xml.app_preference, false);
