@@ -12,15 +12,15 @@ import android.widget.TextView;
  * @author Princewill Okorie
  *
  */
-public class Fragment_ShowNotes extends DialogFragment{
-	private static final String TAG = Fragment_ShowNotes.class.getSimpleName();
+public class Dialog_ShowNotes extends DialogFragment{
+	private static final String TAG = Dialog_ShowNotes.class.getSimpleName();
 	private static final String NOTES = "position";
 	private String mNotes;
 	
-	public static Fragment_ShowNotes newInstance(String notes){
+	public static Dialog_ShowNotes newInstance(String notes){
 		Bundle args = new Bundle ();
 		args.putString(NOTES, notes);
-		final Fragment_ShowNotes mNewDetails = new Fragment_ShowNotes();
+		final Dialog_ShowNotes mNewDetails = new Dialog_ShowNotes();
 		mNewDetails.setArguments(args);
 		return mNewDetails;
 	}

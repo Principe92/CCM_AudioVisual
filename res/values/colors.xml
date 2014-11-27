@@ -43,6 +43,7 @@
 	<color name="red">#CD0000</color>
 	
 	<!-- Deep Orange -->
+	<color name="deeporange_300">#ff8a65</color>
 	<color name="deeporange_500">#FF5722</color>
 	<color name="deeporange_700">#E64A19</color>
 	<color name="deeporange_100">#FFCCBC</color> 
@@ -52,6 +53,7 @@
 	<color name="grey_900">#212121</color>
 	
 	<color name="teal_500">#009688</color>
+	<color name="teal_300">#4db6ac</color>
 	
 	<color name="lightblue_500">#03A9F4</color>
 	<color name="schedule_color">#CDC8B1</color>

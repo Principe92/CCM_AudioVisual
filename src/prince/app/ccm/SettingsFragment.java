@@ -51,7 +51,6 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		attachListener(findPreference(getResources().getString(R.string.pref_videoUrl_key)));
 		attachListener(findPreference(getResources().getString(R.string.pref_proyUrl_key)));
 		attachListener(findPreference(getResources().getString(R.string.pref_discosUrl_key)));
-	//	attachListener(findPreference(getResources().getString(R.string.pref_zonasUrl_key)));
 		
 		Preference pref = findPreference(getResources().getString(R.string.pref_app_version_key));
 		try {
@@ -135,10 +134,6 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		
 		else if (pref.getKey().equalsIgnoreCase(getResources().getString(R.string.pref_discosUrl_key))){
 			Activity_Turnos.sDiscosURL = newValue;
-		}
-		
-		else if (pref.getKey().equalsIgnoreCase(getResources().getString(R.string.pref_zonasUrl_key))){
-			Activity_Main.sZonasURL = newValue;
 		}
 	}
 	

@@ -16,6 +16,7 @@
     <string-array name="array_navigation">
         <item>Turnos</item>
         <item>Manuales</item>
+        <item>Contactos</item>
     </string-array>
     
     <string-array name="actionBarTitles">
@@ -40,6 +41,34 @@
         <item>Introducción a XHTML</item>
         <item>Casa Blanca Smart Edit</item>
         <item>Proyector LCD XL5980U</item>
+    </string-array>
+    
+    <string-array name="array_contact">
+        <item>Audiovisual</item>
+        <item>Antonio Herrera Peña</item>
+        <item>Vanessa Herrera</item>
+        <item>Óscar Malagón Alvarez</item>
+    </string-array>
+    
+    <string-array name="array_numbers">
+        <item>971&#8211;906&#8211;785</item>
+        <item>610&#8211;394&#8211;706+971&#8211;734&#8211;363</item>
+        <item>Unknown</item>
+        <item>685&#8211;553&#8211;888</item>
+    </string-array>
+    
+    <string-array name="array_emails">
+        <item>audiovisual@iglesiamallorca.com</item>
+        <item>herrera1954@gmail.com</item>
+        <item>app@gmail.com+appccm@outlook.com</item>
+        <item>oscardemallorca@gmail.com</item>
+    </string-array>
+    
+    <string-array name="array_role">
+        <item>Ministerio</item>
+        <item>Responsable de grabación</item>
+        <item>Responsable de proyección</item>
+        <item>Técnico audiovisual</item>
     </string-array>
     
     <string name="escaladeplanos_av">http://www.iglesiamallorca.com/audiovisual/manuales/escaladeplanos_av.pdf</string>
@@ -93,10 +122,18 @@
     <!-- Button Texts -->
     <string name="btn_open">ABRIR</string>
     <string name="btn_update">ACTUALIZAR</string>
-    <string name="btn_call">Llamar</string>
-    <string name="btn_message">Enviar mensaje</string>
-    <string name="btn_email">Enviar correo</string>
+    <string name="btn_call">LLAMAR</string>
+    <string name="btn_message">ENVIAR MENSAJE</string>
+    <string name="btn_email">ENVIAR CORREO</string>
+    <string name="btn_cancel">CANCELAR</string>
     
+    <!-- Dialog Headers -->
+    <string name="number_choose">Marca un numero de telefono</string>
+    <string name="email_choose">Marca los destinatarios</string>
+    
+    <!-- Toast messages -->
     <string name="no_connection">No hay conexión !</string>
+    <string name="call_failed">Ha occurrido un error</string>
+    <string name="email_failed">No hay aplicación de correo electrónico instalada</string>
 
 </resources>

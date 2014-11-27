@@ -112,7 +112,7 @@ public class Activity_Schedule extends ActivityBase implements OnItemSelectedLis
 		}
 		
 		if (itemId == R.id.action_web) {
-			Intent intent = new Intent(this, Activity_Main.class);
+			Intent intent = new Intent(this, Activity_Contacts.class);
 			startActivity(intent);
 			return true;
 		}
@@ -158,7 +158,7 @@ public class Activity_Schedule extends ActivityBase implements OnItemSelectedLis
 		
         case R.id.action_pop_note:
             // Show Notes
-        	DialogFragment aT = Fragment_ShowNotes.newInstance(ScheduleSDK.fetchNote());
+        	DialogFragment aT = Dialog_ShowNotes.newInstance(ScheduleSDK.fetchNote());
         	aT.show(getSupportFragmentManager(), TAG);
             return true;
         
@@ -166,7 +166,7 @@ public class Activity_Schedule extends ActivityBase implements OnItemSelectedLis
         	// Show List
         	int position = mPager.getCurrentItem();
         	ArrayList<String> workerList = ScheduleSDK.fetchWorkerList(position + 1);
-        	DialogFragment list = Fragment_ShowLists.newInstance(workerList);
+        	DialogFragment list = Dialog_ShowLists.newInstance(workerList);
         	list.show(getSupportFragmentManager(), TAG);
         default:
             return false;

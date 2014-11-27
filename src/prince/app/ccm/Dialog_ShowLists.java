@@ -18,17 +18,17 @@ import android.widget.TextView;
  * @author Princewill Okorie
  *
  */
-public class Fragment_ShowLists extends DialogFragment{
-	private static final String TAG = Fragment_ShowLists.class.getSimpleName();
+public class Dialog_ShowLists extends DialogFragment{
+	private static final String TAG = Dialog_ShowLists.class.getSimpleName();
 	private static final String LIST = "position";
 	private ArrayList<String> mWorkerList;
 	
 	private ListView mList;
 	
-	public static Fragment_ShowLists newInstance(ArrayList<String> list){
+	public static Dialog_ShowLists newInstance(ArrayList<String> list){
 		Bundle args = new Bundle ();
 		args.putStringArrayList(LIST, list);
-		final Fragment_ShowLists mNewDetails = new Fragment_ShowLists();
+		final Dialog_ShowLists mNewDetails = new Dialog_ShowLists();
 		mNewDetails.setArguments(args);
 		return mNewDetails;
 	}
@@ -46,7 +46,7 @@ public class Fragment_ShowLists extends DialogFragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle oldState){
 		super.onCreateView(inflater, parent, oldState);
-		View view = inflater.inflate(R.layout.layout_list, parent, false);
+		View view = inflater.inflate(R.layout.layout_dialog_showlist, parent, false);
 		
 		// set the album name
 		mList = (ListView) view.findViewById(R.id.list_showlist);

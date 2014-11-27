@@ -1,5 +1,6 @@
 package prince.app.ccm.tools;
 
+import prince.app.ccm.Activity_Contacts;
 import prince.app.ccm.Activity_Log;
 import prince.app.ccm.Activity_Manuals;
 import prince.app.ccm.Activity_Turnos;
@@ -132,6 +133,9 @@ public abstract class ActivityBase extends ActionBarActivity implements AlertDia
 			break;
 		case 1:
 			switchPage = new Intent(this, Activity_Manuals.class);
+			break;
+		case 2:
+			switchPage = new Intent(this, Activity_Contacts.class);
 			break;
 		}
 		
