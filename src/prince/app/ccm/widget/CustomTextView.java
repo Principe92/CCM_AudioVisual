@@ -8,9 +8,9 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 
-public class TypefacedTextView extends TextView {
+public class CustomTextView extends TextView {
 
-    public TypefacedTextView(Context context, AttributeSet attrs) {
+    public CustomTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         //Typeface.createFromAsset doesn't work in the layout editor. Skipping...
@@ -18,8 +18,8 @@ public class TypefacedTextView extends TextView {
             return;
         }
   
-        TypedArray styledAttrs = context.obtainStyledAttributes(attrs, R.styleable.TypefacedTextView);
-        String fontName = styledAttrs.getString(R.styleable.TypefacedTextView_typeface);
+        TypedArray styledAttrs = context.obtainStyledAttributes(attrs, R.styleable.CustomTextView);
+        String fontName = styledAttrs.getString(R.styleable.CustomTextView_typeface);
         styledAttrs.recycle();
 
         if (fontName != null) {

@@ -1,7 +1,10 @@
-package prince.app.ccm;
+package prince.app.ccm.delete;
 
 import java.util.Calendar;
 
+import prince.app.ccm.R;
+import prince.app.ccm.R.id;
+import prince.app.ccm.R.layout;
 import prince.app.ccm.tools.ScheduleSDK;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

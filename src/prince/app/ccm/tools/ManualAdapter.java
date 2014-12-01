@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import prince.app.ccm.Activity_Manuals;
 import prince.app.ccm.R;
+import prince.app.ccm.delete.Activity_Manuals;
 import prince.app.ccm.util.InstallAPP;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -41,13 +41,18 @@ public class ManualAdapter extends RecyclerView.Adapter<ManualAdapter.ManualView
 	private String noConnection;
 	private static final String TASK_ID = "Task_";
 	
-	private boolean mExitTaskEarly = false;
-	
 	public ManualAdapter(ArrayList<ManualCards> list, ArrayList<String> activeTask, ActionBarActivity ct){
 		this.manualList = list;
 		this.context = ct;
 		noConnection = ct.getResources().getString(R.string.no_connection);
 		ongoingTasks = activeTask;
+	}
+	
+	public ManualAdapter(ArrayList<ManualCards> list, ActionBarActivity ct){
+		this.manualList = list;
+		this.context = ct;
+		noConnection = ct.getResources().getString(R.string.no_connection);
+		ongoingTasks = new ArrayList<String>();
 	}
 
 	@Override

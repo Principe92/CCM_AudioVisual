@@ -17,14 +17,13 @@
 package prince.app.ccm;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.view.Menu;
+import android.support.v7.app.ActionBarActivity;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
-public class Activity_Log extends FragmentActivity {
+public class Activity_Authenticate extends ActionBarActivity {
 	
 	@Override
 	protected void onCreate(Bundle oldState) {
@@ -41,12 +40,12 @@ public class Activity_Log extends FragmentActivity {
 	
 	@Override
 	public void onBackPressed(){
-		
+		super.onBackPressed();
 	}
 	
-	@Override
+/*	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_empty, menu);
 		return true;
-	}
+	} */
 }

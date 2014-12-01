@@ -2,14 +2,17 @@ package prince.app.ccm;
 
 import prince.app.ccm.tools.ActivityBase;
 import prince.app.ccm.tools.Tool;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -17,65 +20,87 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class Activity_Turnos extends ActivityBase implements Fragment_Web.WebListener, OnItemSelectedListener, Network.clickListener{
-	private static final String TAG = Activity_Turnos.class.getSimpleName();
+public class Activity_Main extends ActivityBase implements Fragment_Turnos.WebListener, OnItemSelectedListener, 
+		Network.clickListener, Fragment_NavigationDrawer.NavigationDrawerCallbacks{
+	private static final String TAG = Activity_Main.class.getSimpleName();
 	
 	// URL's
-	public static String sCameraURL;
-	public static String sProyURL;
-	public static String sDiscosURL;
+	public static String URL_CAMERA;
+	public static String URL_PROYECCION;
+	public static String URL_DISCOS;
 	
 	// View Variables
 	private Spinner mSpinner;
 	private Toolbar mToolBar;
+	private Fragment_NavigationDrawer mNavigationDrawerFragment;
 	
 	// Fragment Tags
-	private static final String WEB_TAG = "mWebPage";
 	private static final String WIFI_TAG = "mNoNetwork";
-	private static final String SALIR = "warning_frag";
+	public static final String MANUAL_FRAGMENT = "manual_fragment";
+	public static final String CONTACT_FRAGMENT = "contact_fragment";
+	public static final String TURNS_FRAGMENT = "turns_fragment";
 	
 	// Saved State KEYS
 	private static final String SAVED_CURRENT_URL = "current_url";
 	private static final String SAVED_SPINNER_LAST_ITEM = "last_clicked";
+	private static final String SAVED_SPINNER_VISIBILITY = "spinner_visible";
+	private static final String SAVED_TITLE_VISIBILITY = "title_visible";
 	
 	// Variables
-	private String mCurrentURL;
-	private String mFirstShown;
-	private SharedPreferences mPreference;
-	private int mSpinnerLast;
+	private String mPageURL;
+	private int mSpinnerLast = 0;
+	private boolean mShowSpinner;
+	private boolean mShowTitle;
+	private int mNavigationLastPosition = -1;
+	private String defaultURLKey;
 	private static String TITLE;
+	private boolean mURLoaded;
 	
 	@Override
 	public void onCreate(Bundle savedState){
 		super.onCreate(savedState);
 		setContentView(R.layout.layout_turnos);
+		
 		TITLE = getResources().getStringArray(R.array.array_navigation)[0];
 	
 		// initialize default variables
-		initDefaults();
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		URL_CAMERA = sp.getString(getResources().getString(R.string.pref_videoUrl_key), "");			// get video url
+		URL_PROYECCION = sp.getString(getResources().getString(R.string.pref_proyUrl_key), "");			// get projection url
+		URL_DISCOS = sp.getString(getResources().getString(R.string.pref_discosUrl_key), "");			// get disk url
+		defaultURLKey = sp.getString(getResources().getString(R.string.pref_defaultPage_key), "");  	// get preferred first screen
+		
+		// Restore value of variables from old state
+		if (savedState != null){
+			mPageURL = savedState.getString(SAVED_CURRENT_URL);
+			mSpinnerLast = savedState.getInt(SAVED_SPINNER_LAST_ITEM);
+			mShowSpinner = savedState.getBoolean(SAVED_SPINNER_VISIBILITY, true);
+			mShowTitle = savedState.getBoolean(SAVED_TITLE_VISIBILITY, true);
+		} else{
+			loadPrefSchedule(defaultURLKey);
+			mShowSpinner = true;
+			mShowTitle = false;
+			mURLoaded = false;
+		}
 		
 		// Set up the tool bar
 		mToolBar = (Toolbar) findViewById(R.id.toolbar_turnos);
 		setSupportActionBar(mToolBar);
 		
-		// Restore value of variables from old state
-		if (savedState != null){
-			mDrawerTitle = savedState.getString(SAVED_TITLE);
-			mCurrentURL = savedState.getString(SAVED_CURRENT_URL);
-			mSpinnerLast = savedState.getInt(SAVED_SPINNER_LAST_ITEM);
-		}
+        // Add the navigation drawer
+		mNavigationDrawerFragment = (Fragment_NavigationDrawer)
+                getFragmentManager().findFragmentById(R.id.navigation_drawer);
+
+        // Set up the drawer.
+        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout_turnos));
+        
+        // Add the spinner
+        initSpinner();
 		
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		
-		// initialize the navigation drawer
-		initNavigationDrawer();
-				
-		initSpinner();
-				
-		if (savedState == null){
-			loadPreferredSchedule(mFirstShown);
-		}
-		
+        // Disable action bar title
+		if (!mShowSpinner) mSpinner.setVisibility(View.GONE);
+		else getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if (!mShowTitle) getSupportActionBar().setDisplayShowTitleEnabled(false);
 	}
 	
 	@Override
@@ -83,8 +108,9 @@ public class Activity_Turnos extends ActivityBase implements Fragment_Web.WebLis
 	    // Save the user's current game state
 		super.onSaveInstanceState(state);
 		
-	    state.putString(SAVED_CURRENT_URL, mCurrentURL);
+	    state.putString(SAVED_CURRENT_URL, mPageURL);
 	    state.putInt(SAVED_SPINNER_LAST_ITEM, mSpinnerLast);
+	    state.putBoolean(SAVED_SPINNER_VISIBILITY, (mSpinner.getVisibility() == View.VISIBLE));
 	}
 	
 	public void initSpinner(){
@@ -98,154 +124,92 @@ public class Activity_Turnos extends ActivityBase implements Fragment_Web.WebLis
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		
+		mSpinner.setOnItemSelectedListener(this);
+		
 		// Apply the adapter to the spinner
 		mSpinner.setAdapter(adapter);
-		mSpinner.setOnItemSelectedListener(this);
+		mSpinner.setSelection(mSpinnerLast);
 	}
 	
-	private void initDefaults(){
-		mPreference = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		
-		mFirstShown = mPreference.getString(getResources().getString(R.string.pref_defaultPage_key), "");  	// get preferred first screen
-		Log.e(TAG, "Default Page: " + mFirstShown);
-		
-		sCameraURL = mPreference.getString(getResources().getString(R.string.pref_videoUrl_key), "");		// get video url
-		sProyURL = mPreference.getString(getResources().getString(R.string.pref_proyUrl_key), "");			// get projection url
-		sDiscosURL = mPreference.getString(getResources().getString(R.string.pref_discosUrl_key), "");		// get disk url
-	}
-	
-	private void loadPreferredSchedule(String key) {
+	private void loadPrefSchedule(String key) {
 		
 		if (key.equalsIgnoreCase("video")){
-			mCurrentURL = sCameraURL; // modify current URL
-			mSpinner.setSelection(0, true);
+			mSpinnerLast = 0;
+			mPageURL = URL_CAMERA;
 		}
 		
-		if (key.equalsIgnoreCase("proyeccion")){
-			mCurrentURL = sProyURL; // modify current URL
-			mSpinner.setSelection(1, true);
+		else if (key.equalsIgnoreCase("proyeccion")){
+			mSpinnerLast = 1;
+			mPageURL = URL_PROYECCION;
 		}
 		
-		if (key.equalsIgnoreCase("discos")){
-			mCurrentURL = sDiscosURL; // modify current URL
-			mSpinner.setSelection(2, true);
+		else if (key.equalsIgnoreCase("discos")){
+			mSpinnerLast = 2;
+			mPageURL = URL_DISCOS;
 		}
 	}
 	
 	public void spinnerSwitch(int position){
-
-		switch(position){
 		
-		case 0:
-			if (!mCurrentURL.equalsIgnoreCase(sCameraURL)) mCurrentURL = sCameraURL;
-			break;
+		if (mURLoaded){
+			switch(position){
 			
-		case 1:
-			if (position == 1 && !mCurrentURL.equalsIgnoreCase(sProyURL)) mCurrentURL = sProyURL;
-			break;
-		
-		case 2:
-			if (position == 2 && !mCurrentURL.equalsIgnoreCase(sDiscosURL)) mCurrentURL = sDiscosURL;
-			break;
-		
-		default:
-			break;
+			case 0:
+				mPageURL = URL_CAMERA;
+				break;
+				
+			case 1:
+				mPageURL = URL_PROYECCION;
+				break;
+			
+			case 2:
+				mPageURL = URL_DISCOS;
+				break;
+			}
+			
+			// Load new page
+			Fragment_Turnos webPage = (Fragment_Turnos) getSupportFragmentManager().findFragmentByTag(TURNS_FRAGMENT);
+			// Load page if fragment is visible (inflated). Else it will be loaded once the fragment has been inflated
+			if (webPage != null) webPage.loadPage(mPageURL);
 		}
-		
-		Fragment_Web webPage = (Fragment_Web) getSupportFragmentManager().findFragmentByTag(WEB_TAG);
-		if (webPage != null) webPage.loadPage(mCurrentURL);
-		else{
-			webPage = Fragment_Web.newInstance(mCurrentURL);
-			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-			ft.replace(R.id.frame_audio_main, webPage, WEB_TAG);
-			ft.commit();
-			getSupportFragmentManager().executePendingTransactions();
-		}
-	}
-	
-/*	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.menu_turnos, menu);
-		return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item){
-		if (mDrawerToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
-		
-		int itemId = item.getItemId();
-		
-		if (itemId == R.id.action_main_refresh) {
-			actionBarRefresh();
-			return true;
-		}
-		
-		if (itemId == R.id.action_turnos_help) {
-			Intent intent = new Intent();
-	        intent.setClass(this, Activity_Manuals.class);
-	        startActivity(intent); 
-			return true;
-		}
-		
-		if (itemId == R.id.action_settings) {
-			// Open the settings menu
-			Intent intent = new Intent();
-	        intent.setClass(this, SettingsActivity.class);
-	        startActivityForResult(intent, 0); 
-	        Log.d(TAG, "settings called");
-			return true;
-		}
-		else if (itemId == R.id.action_main_log) {
-			//TODO: Salir
-	    	DialogFragment aT = AlertDialogX.newInstance(	"Cerrar sessión", 
-															getResources().getString(R.string.action_warning_salir), 
-															R.string.action_logout, 
-															R.string.cancel,
-															SALIR);
-	    	
-	    	aT.show(getSupportFragmentManager(), SALIR);
-			return true;
-		}
-		
-		else {
-			return super.onOptionsItemSelected(item);
-		}
-	} */
+	} 
 	
 	/** task to undergo when refresh button is pressed */
 	@Override
 	public void actionBarRefresh(){
 		if (Tool.getInstance().isConnection()){
-			Fragment_Web webPage = (Fragment_Web) getSupportFragmentManager().findFragmentByTag(WEB_TAG);
+			Fragment_Turnos webPage = (Fragment_Turnos) getSupportFragmentManager().findFragmentByTag(TURNS_FRAGMENT);
 			if (webPage != null) webPage.refreshPage();
 			else {
-				webPage = Fragment_Web.newInstance(mCurrentURL);
+				webPage = Fragment_Turnos.newInstance(mPageURL);
 				FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-				ft.replace(R.id.frame_audio_main, webPage, WEB_TAG);
+				ft.replace(R.id.frame_layout_turnos, webPage, TURNS_FRAGMENT);
 				ft.commit();
 			}
 		}
 		
 		else {
-			Toast.makeText(this, "No hay conexión !", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, getResources().getString(R.string.no_connection), Toast.LENGTH_LONG).show();
 		}
 	}
 	
 	@Override
 	public void onNetworkRetry() {
 		if (Tool.getInstance().isConnection()){
-			Fragment_Web webPage = Fragment_Web.newInstance(mCurrentURL);
+			Fragment_Turnos webPage = Fragment_Turnos.newInstance(mPageURL);
 			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-			ft.replace(R.id.frame_audio_main, webPage, WEB_TAG);
+			ft.replace(R.id.frame_layout_turnos, webPage, TURNS_FRAGMENT);
 			ft.commit();
 		}
 	}
 	
 	@Override
 	public void onNetworkCheck() {
-		startActivityForResult(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK), Tool.CONNECT);
+		try{
+			startActivityForResult(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK), Tool.CONNECT);
+		} catch(ActivityNotFoundException e){
+			
+		}
 	}
 	
 	@Override
@@ -257,20 +221,16 @@ public class Activity_Turnos extends ActivityBase implements Fragment_Web.WebLis
 			wifi = Network.newInstance();
 		}
 		
-		ft.replace(R.id.frame_audio_main, wifi, WIFI_TAG);
+		ft.replace(R.id.frame_layout_turnos, wifi, WIFI_TAG);
 		ft.commit();
 	}
 	
 	@Override
-	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-		spinnerSwitch(position);
+	public String onPageStarted(){
+		mURLoaded = true;
+		return mPageURL;
 	}
-
-	@Override
-	public void onNothingSelected(AdapterView<?> parent) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public Toolbar getToolBar() {
@@ -285,14 +245,90 @@ public class Activity_Turnos extends ActivityBase implements Fragment_Web.WebLis
 
 	@Override
 	public void onDrawerOpen() {
-		mSpinner.setVisibility(View.GONE);
-		getSupportActionBar().setDisplayShowTitleEnabled(true);
+		showSpinner(false);
 	}
 
 	@Override
 	public void onDrawerClose() {
-		mSpinner.setVisibility(View.VISIBLE);
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
+		if (fragVisible(TURNS_FRAGMENT)){ 
+			showSpinner(true);
+		}
+		
+	}
+	
+	private void showSpinner(boolean val){
+		if (val){
+			mShowTitle = false;
+			mShowSpinner = true;
+			mSpinner.setVisibility(View.VISIBLE);
+			getSupportActionBar().setDisplayShowTitleEnabled(false);
+		} else {
+			mShowTitle = true;
+			mShowSpinner = false;
+			mSpinner.setVisibility(View.GONE);
+			getSupportActionBar().setDisplayShowTitleEnabled(true);
+		}
+	}
+	private boolean fragVisible(String TAG){
+		Fragment fg = getSupportFragmentManager().findFragmentByTag(TAG);
+		if (fg != null) return fg.isVisible();
+		else return false;
+	}
+	
+	@Override
+	public void navigationSwitch(int position) {
+		FragmentManager mg = getSupportFragmentManager();
+		FragmentTransaction ft = mg.beginTransaction();
+		
+		switch(position){
+		
+		case 0:
+			if (mNavigationLastPosition != position){
+				Fragment_Turnos fg = (Fragment_Turnos) mg.findFragmentByTag(TURNS_FRAGMENT);
+				if (fg == null) fg = Fragment_Turnos.newInstance(mPageURL);
+				ft.replace(R.id.frame_layout_turnos, fg, TURNS_FRAGMENT);
+				ft.commit();
+			}
+			
+			break;
+		
+		case 1:
+			if (mNavigationLastPosition != position){
+				if (mSpinner != null) mSpinner.setVisibility(View.GONE);
+				
+				Fragment_Manuals fg = (Fragment_Manuals) mg.findFragmentByTag(MANUAL_FRAGMENT);
+				if (fg == null) fg = Fragment_Manuals.newInstance();
+				ft.replace(R.id.frame_layout_turnos, fg, MANUAL_FRAGMENT);
+				ft.commit();
+			}
+			break;
+		
+		case 2:
+			if (mNavigationLastPosition != position){
+				if (mSpinner != null) mSpinner.setVisibility(View.GONE);
+				
+				Fragment_Contacts fg = (Fragment_Contacts) mg.findFragmentByTag(CONTACT_FRAGMENT);
+				if (fg == null) fg = Fragment_Contacts.newInstance();
+				ft.replace(R.id.frame_layout_turnos, fg, CONTACT_FRAGMENT);
+				ft.commit();
+			}
+			break;
+		}
+		
+		mNavigationLastPosition = position;
+	}
+	
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		if(mSpinnerLast != position){
+			mSpinnerLast = position;
+			spinnerSwitch(position);
+		}
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> parent) {
+		// TODO Auto-generated method stub
 		
 	}
 

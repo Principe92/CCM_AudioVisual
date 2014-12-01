@@ -1,17 +1,12 @@
 package prince.app.ccm.tools;
 
-import prince.app.ccm.Activity_Contacts;
-import prince.app.ccm.Activity_Log;
-import prince.app.ccm.Activity_Manuals;
-import prince.app.ccm.Activity_Turnos;
+import prince.app.ccm.Activity_Authenticate;
 import prince.app.ccm.R;
 import prince.app.ccm.SettingsActivity;
 import prince.app.ccm.util.Util;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,10 +15,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 public abstract class ActivityBase extends ActionBarActivity implements AlertDialogX.AlertXListener{
@@ -33,32 +24,27 @@ public abstract class ActivityBase extends ActionBarActivity implements AlertDia
     protected ListView mDrawerList;
     protected ActionBarDrawerToggle mDrawerToggle;
     
-    protected String mDrawerTitle;
-    
-    protected int mLastClicked;
-    
-    // Saved State KEYS
-    private static final String SAVED_LAST_CLICK = "last_clicked_save";
 	protected static final String SAVED_TITLE = "actionbar";
 	private static final String SALIR = "warning_frag";
     
     @Override
     protected void onStop(){
 		super.onStop();
-		mDrawerLayout.closeDrawers();
+	//	mDrawerLayout.closeDrawers();
 	}
     
 	public void initNavigationDrawer(){
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_audio_main);
+	/*	mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_turnos);
 		mDrawerList = (ListView) findViewById(R.id.list_drawer_main);
 		mDrawerList.setFastScrollEnabled(true);
+		mFragmentContainerView = findViewById(R.id.navigation_layout_turnos);
 	        
 		//set a custom shadow that overlays the main content when the drawer opens
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 	      
 		ImageView drawer = (ImageView)findViewById(R.id.image_drawer_main);
 		drawer.setLayoutParams(new LinearLayout.LayoutParams(
-				getResources().getDimensionPixelSize(R.dimen.drawer_photo_width),
+				getResources().getDimensionPixelSize(R.dimen.navigation_drawer_width),
 				getResources().getDimensionPixelSize(R.dimen.drawer_photo_height)));
 		drawer.setScaleType(ImageView.ScaleType.CENTER_CROP);
 	        
@@ -77,54 +63,60 @@ public abstract class ActivityBase extends ActionBarActivity implements AlertDia
 		//Set the list's click listener
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-		mDrawerToggle = new ActionBarDrawerToggle(
-	                this,                  /* host Activity */
-	                mDrawerLayout,         /* DrawerLayout object */
-	                getToolBar(),  /* nav drawer image to replace 'Up' caret */
-	                R.string.drawer_open,  /* "open drawer" description for accessibility */
-	                R.string.drawer_close  /* "close drawer" description for accessibility */
-	                ){
+	//	mDrawerToggle = new ActionBarDrawerToggle(
+	 //               this,                  /* host Activity */
+	  //              mDrawerLayout,         /* DrawerLayout object */
+	   //             getToolBar(),  /* nav drawer image to replace 'Up' caret */
+	    //            R.string.drawer_open,  /* "open drawer" description for accessibility */
+	     //           R.string.drawer_close  /* "close drawer" description for accessibility */
+	      //          ){
 	        	/** Called when a drawer has settled in a completely closed state. */
-			public void onDrawerClosed(View view) {
+	/*		public void onDrawerClosed(View view) {
 				super.onDrawerClosed(view);
 				getSupportActionBar().setTitle(mDrawerTitle);
 				onDrawerClose();
 			}
 
-			/** Called when a drawer has settled in a completely open state. */
+			/** Called when a drawer has settled in a completely open state. 
 			public void onDrawerOpened(View drawerView) {
 				super.onDrawerOpened(drawerView);
+				Tool.getInstance().modBolPref(NAVIGATION_DRAWER_LEARNED, true);
 				getSupportActionBar().setTitle("Menu");
 				onDrawerOpen();
 			}
 
 		};
 	        
-		mDrawerLayout.setDrawerListener(mDrawerToggle);
+	//	mDrawerLayout.setDrawerListener(mDrawerToggle);
 	        
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
+		
+//		boolean learned = Tool.getInstance().getBolPref(NAVIGATION_DRAWER_LEARNED);
+//		if (!learned){
+//			mDrawerLayout.openDrawer(mFragmentContainerView);
+//		} */
 	}
 	
-	private class DrawerItemClickListener implements ListView.OnItemClickListener {
+/*	private class DrawerItemClickListener implements ListView.OnItemClickListener {
 	    @Override
 	    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 	    	
-	        // modify last clicked list item
-	    	mLastClicked = position;
-	    	
 	    	// load adequate page
 	    	navigationSwitch(position);
+	    	
+	        // modify last clicked list item
+	    	mLastClicked = position;
 	    		
 	    	// change title of action bar
-	    	mDrawerTitle = Tool.getInstance().changeTitle(position);
-	    	getSupportActionBar().setTitle(mDrawerTitle);
+	    	mDrawerTitle = getResources().getStringArray(R.array.array_navigation)[position];
+	    //	getSupportActionBar().setTitle(mDrawerTitle);
 	    	
 	    	mDrawerLayout.closeDrawers();
 	    }
 	}
-	
-	public void navigationSwitch(int position) {
+	*/
+/*	public void navigationSwitch(int position) {
 		Intent switchPage = null;
 		
 		switch(position){
@@ -141,9 +133,9 @@ public abstract class ActivityBase extends ActionBarActivity implements AlertDia
 		
 		if (switchPage != null) startActivity(switchPage);
 		
-	}
+	} */
 	
-	@Override
+/*	@Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
@@ -154,23 +146,14 @@ public abstract class ActivityBase extends ActionBarActivity implements AlertDia
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
-    }
+    } */
 	
 	@Override
 	public void onPosClick(String type) {
 		Tool.getInstance().modBolPref(Util.SIGN_IN, false);
-		Intent intent = new Intent(this, Activity_Log.class);
+		Intent intent = new Intent(this, Activity_Authenticate.class);
 		startActivity(intent);
 		finish();
-	}
-	
-	@Override
-	public void onSaveInstanceState(Bundle state) {
-	    // Save the user's current game state
-		super.onSaveInstanceState(state);
-		
-	    state.putString(SAVED_TITLE, mDrawerTitle);
-	    state.putInt(SAVED_LAST_CLICK, mLastClicked);
 	}
 	
 	@Override
@@ -181,9 +164,9 @@ public abstract class ActivityBase extends ActionBarActivity implements AlertDia
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
-		if (mDrawerToggle.onOptionsItemSelected(item)) {
+	/*	if (mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
-		}
+		} */
 		
 		int itemId = item.getItemId();
 		
@@ -219,9 +202,7 @@ public abstract class ActivityBase extends ActionBarActivity implements AlertDia
 			return true;
 		}
 		
-		else {
-			return super.onOptionsItemSelected(item);
-		}
+		return super.onOptionsItemSelected(item);
 	}
 	
 	/**
@@ -236,9 +217,9 @@ public abstract class ActivityBase extends ActionBarActivity implements AlertDia
 	 */
 	public abstract String getActionBarTitle();
 	
-	public abstract void onDrawerOpen();
+/*	public abstract void onDrawerOpen();
 	
-	public abstract void onDrawerClose();
+	public abstract void onDrawerClose(); */
 	
 	public abstract void actionBarRefresh();
 }

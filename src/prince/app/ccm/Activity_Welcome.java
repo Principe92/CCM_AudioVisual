@@ -29,11 +29,11 @@ public class Activity_Welcome extends Activity {
 		mSignedIn = Tool.getInstance().getBolPref(Util.SIGN_IN);
 		
 		if (!mSignedIn){
-			Intent intent = new Intent(this, Activity_Log.class);
+			Intent intent = new Intent(this, Activity_Authenticate.class);
 			startActivity(intent);
 		}
 		else{
-			Intent intent = new Intent(this, Activity_Turnos.class);
+			Intent intent = new Intent(this, Activity_Main.class);
 			startActivity(intent);
 		}
 	}

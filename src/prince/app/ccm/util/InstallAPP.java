@@ -1,12 +1,15 @@
 package prince.app.ccm.util;
 
+import prince.app.ccm.R;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.widget.Toast;
 
 /** A class that manages network connection dialogs */
 public class InstallAPP extends DialogFragment {
@@ -42,7 +45,11 @@ public class InstallAPP extends DialogFragment {
                        // search for an application that views pdf in the play store
            			Intent myIntent = new Intent(Intent.ACTION_VIEW);
         			myIntent.setData(Uri.parse("market://search?q=pdf reader&c=apps"));
-        			startActivity(myIntent); 
+        			try{
+        				startActivity(myIntent);
+        			}catch(ActivityNotFoundException e){
+        				Toast.makeText(getActivity(), getResources().getString(R.string.no_google_store), Toast.LENGTH_LONG).show();
+        			}
                    }
                })
                .setNegativeButton(sNegative, new DialogInterface.OnClickListener() {

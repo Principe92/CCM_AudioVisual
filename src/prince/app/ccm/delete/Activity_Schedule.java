@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-package prince.app.ccm;
+package prince.app.ccm.delete;
 
 import java.util.ArrayList;
 
+import prince.app.ccm.Dialog_ShowLists;
+import prince.app.ccm.Dialog_ShowNotes;
+import prince.app.ccm.R;
+import prince.app.ccm.SettingsActivity;
 import prince.app.ccm.tools.ActivityBase;
 import prince.app.ccm.tools.AlertDialogX;
 import prince.app.ccm.tools.ScheduleSDK;
@@ -247,12 +251,6 @@ public class Activity_Schedule extends ActivityBase implements OnItemSelectedLis
 	}
 
 	@Override
-	public void navigationSwitch(int position) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public Toolbar getToolBar() {
 		return mToolBar;
 	}
@@ -261,18 +259,6 @@ public class Activity_Schedule extends ActivityBase implements OnItemSelectedLis
 	public String getActionBarTitle() {
 		// TODO Auto-generated method stub
 		return "Turnos";
-	}
-
-	@Override
-	public void onDrawerOpen() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onDrawerClose() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

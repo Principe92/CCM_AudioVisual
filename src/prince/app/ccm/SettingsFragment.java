@@ -125,15 +125,15 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 	
 	public void updateEditTextVars(Preference pref, String newValue){
 		if (pref.getKey().equalsIgnoreCase(getResources().getString(R.string.pref_videoUrl_key))){
-			Activity_Turnos.sCameraURL = newValue;
+			Activity_Main.URL_CAMERA = newValue;
 		}
 		
 		else if (pref.getKey().equalsIgnoreCase(getResources().getString(R.string.pref_proyUrl_key))){
-			Activity_Turnos.sProyURL = newValue;
+			Activity_Main.URL_PROYECCION = newValue;
 		}
 		
 		else if (pref.getKey().equalsIgnoreCase(getResources().getString(R.string.pref_discosUrl_key))){
-			Activity_Turnos.sDiscosURL = newValue;
+			Activity_Main.URL_DISCOS = newValue;
 		}
 	}
 	

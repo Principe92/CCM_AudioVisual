@@ -1,52 +1,58 @@
-package prince.app.ccm.delete;
+package prince.app.ccm;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import prince.app.ccm.R;
-import prince.app.ccm.R.array;
-import prince.app.ccm.R.drawable;
-import prince.app.ccm.R.id;
-import prince.app.ccm.R.layout;
-import prince.app.ccm.tools.ActivityBase;
 import prince.app.ccm.tools.ContactAdapter;
 import prince.app.ccm.tools.ContactHolder;
 import prince.app.ccm.tools.Tool;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class Activity_Contacts extends ActivityBase {
-	private static final String TAG = Activity_Contacts.class.getSimpleName();
-	private static final String ACTIVE = "active tasks";
-	private static String TITLE;
-	private ContactAdapter ca;
-	private Toolbar mToolBar;
+public class Fragment_Contacts extends Fragment {
+	private static final String TAG = Fragment_Contacts.class.getSimpleName();
+	private ContactAdapter contactAdapter;
+	
+	public static final Fragment_Contacts newInstance(){
+		final Fragment_Contacts fc = new Fragment_Contacts();
+		return fc;
+	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_manuals);
-		TITLE = getResources().getStringArray(R.array.array_navigation)[2];
+	public void onCreate(Bundle oldState) {
+		super.onCreate(oldState);
 		
-		// Set up the tool bar
-		mToolBar = (Toolbar) findViewById(R.id.my_toolbar);
-		setSupportActionBar(mToolBar);
+		setRetainInstance(true);
 		
-		RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
+		contactAdapter = new ContactAdapter(createList(),(ActionBarActivity) getActivity());
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle oldState){
+		super.onCreateView(inflater, parent, oldState);
+		View view = inflater.inflate(R.layout.layout_manuals, parent, false);
+		
+		setUp(view);
+		
+		return view;
+	}
+	
+	private void setUp(View view){
+		RecyclerView recList = (RecyclerView) view.findViewById(R.id.cardList);
 		recList.setHasFixedSize(true);
-		LinearLayoutManager llm = new LinearLayoutManager(this);
+		LinearLayoutManager llm = new LinearLayoutManager(getActivity());
 		llm.setOrientation(LinearLayoutManager.VERTICAL);
 		recList.setLayoutManager(llm);
-		
-		ca = new ContactAdapter(createList(),this);
-		recList.setAdapter(ca);
-		
-		initNavigationDrawer();
+		recList.setAdapter(contactAdapter);
 	}
 	
 	private ArrayList<ContactHolder> createList() {
@@ -74,51 +80,23 @@ public class Activity_Contacts extends ActivityBase {
 		return result;
 	}
 	
+	 @Override
+	 public void onActivityCreated (Bundle savedInstanceState) {
+		 super.onActivityCreated(savedInstanceState);
+		 // Indicate that this fragment would like to influence the set of actions in the action bar.
+		 setHasOptionsMenu(true);
+	 }
+	
 	@Override
-	public boolean onPrepareOptionsMenu(Menu menu){
+	public void onPrepareOptionsMenu(Menu menu){
 		MenuItem refresh = menu.findItem(R.id.action_main_refresh);
 		refresh.setEnabled(false)
 				.setVisible(false);
-		
-		return true;
-	}
-	
-	@Override
-	public void onSaveInstanceState(Bundle oldState){
-		super.onSaveInstanceState(oldState);
-	}
-	
-	@Override
-	protected void onStop(){
-		super.onStop();
-	}
-	
-	@Override
-	protected void onResume(){
-		super.onResume();
 	}
 	
 	public static boolean fileExist(String name){
 		// create new folder or reference existing one
 		File file = new File(Tool.APP_DIR, name);
 		return (file.exists() && file.length() > 0);
-	}
-	
-	@Override
-	public Toolbar getToolBar() {
-		// TODO Auto-generated method stub
-		return mToolBar;
-	}
-
-	@Override
-	public String getActionBarTitle() {
-		// TODO Auto-generated method stub
-		return TITLE;
-	}
-
-	@Override
-	public void actionBarRefresh() {
-		// TODO Auto-generated method stub
-		
 	}
 }

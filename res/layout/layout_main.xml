@@ -9,17 +9,17 @@
   	
   <android.support.v4.widget.DrawerLayout
   	xmlns:android="http://schemas.android.com/apk/res/android"
-  	android:id="@+id/drawer_audio_main"
+  	android:id="@+id/drawer_layout_turnos"
   	android:layout_width="match_parent"
   	android:layout_height="match_parent">
    
 	<FrameLayout
-          android:id="@+id/frame_audio_main"
+          android:id="@+id/frame_layout_turnos"
           android:layout_width="fill_parent"
 	      android:layout_height="fill_parent"/>
 
   	<LinearLayout
-    		android:layout_width="@dimen/drawer_photo_width"
+    		android:layout_width="@dimen/navigation_drawer_width"
     		android:layout_gravity="start"
     		android:layout_height="match_parent"
     		android:background="@color/loading_color_2"

@@ -371,7 +371,7 @@ public class Fragment_Log extends Fragment{
 			if (dataWasOK){
 				saveCredentials();
 				Tool.getInstance().modBolPref(Util.SIGN_IN, true);
-					Intent intent = new Intent(getActivity(), Activity_Turnos.class);
+					Intent intent = new Intent(getActivity(), Activity_Main.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);
 			}

@@ -1,55 +1,61 @@
-package prince.app.ccm.delete;
+package prince.app.ccm;
 
 import java.io.File;
 import java.util.ArrayList;
 
-import prince.app.ccm.R;
-import prince.app.ccm.R.array;
-import prince.app.ccm.R.drawable;
-import prince.app.ccm.R.id;
-import prince.app.ccm.R.layout;
-import prince.app.ccm.R.string;
-import prince.app.ccm.tools.ActivityBase;
 import prince.app.ccm.tools.ManualAdapter;
 import prince.app.ccm.tools.ManualCards;
 import prince.app.ccm.tools.Tool;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class Activity_Manuals extends ActivityBase {
-	private static final String TAG = Activity_Manuals.class.getSimpleName();
-	private static final String ACTIVE = "active tasks";
-	private static String TITLE;
-	private ManualAdapter ca;
-	private ArrayList<String> mActiveTasks;
-	private Toolbar mToolBar;
+public class Fragment_Manuals extends Fragment {
+	private static final String TAG = Fragment_Manuals.class.getSimpleName();
+	private ManualAdapter manualAdapter;
+	
+	public static Fragment_Manuals newInstance(){
+		final Fragment_Manuals mFragment = new Fragment_Manuals();
+		return mFragment;
+	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.layout_manuals);
-		TITLE = getResources().getStringArray(R.array.array_navigation)[1];
+	public void onCreate(Bundle oldState) {
+		super.onCreate(oldState);
 		
-		// Set up the tool bar
-		mToolBar = (Toolbar) findViewById(R.id.my_toolbar);
-		setSupportActionBar(mToolBar);
+		// Set up adapter
+		manualAdapter = new ManualAdapter(createList(), (ActionBarActivity) getActivity());
 		
-		RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
+		setRetainInstance(true);
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle oldState){
+		super.onCreateView(inflater, parent, oldState);
+		
+		View view = inflater.inflate(R.layout.layout_manuals, parent, false);
+		
+		setUp(view);
+		
+		return view;
+	}
+	
+	private void setUp(View view){
+		RecyclerView recList = (RecyclerView) view.findViewById(R.id.cardList);
 		recList.setHasFixedSize(true);
-		LinearLayoutManager llm = new LinearLayoutManager(this);
+		LinearLayoutManager llm = new LinearLayoutManager(getActivity());
 		llm.setOrientation(LinearLayoutManager.VERTICAL);
 		recList.setLayoutManager(llm);
-		
-		mActiveTasks = new ArrayList<String>();
-		if (savedInstanceState != null) mActiveTasks = savedInstanceState.getStringArrayList(ACTIVE);
-		ca = new ManualAdapter(createList(), mActiveTasks, this);
-		recList.setAdapter(ca);
-		
-		initNavigationDrawer();
+		recList.setAdapter(manualAdapter);
 	}
 	
 	private ArrayList<ManualCards> createList() {
@@ -66,28 +72,6 @@ public class Activity_Manuals extends ActivityBase {
 		}
 		
 		return result;
-	}
-	
-	@Override
-	public void onSaveInstanceState(Bundle oldState){
-		super.onSaveInstanceState(oldState);
-		oldState.putStringArrayList(ACTIVE, ca.getActiveTasks());
-	}
-	
-	@Override
-	protected void onStop(){
-		super.onStop();
-		
-		// Don't refresh the UI with new data from Async Task
-		Tool.EXIT_TASK = true;
-	}
-	
-	@Override
-	protected void onResume(){
-		super.onResume();
-		
-		// Refresh the UI with new data from Async Task
-		Tool.EXIT_TASK = false;
 	}
 	
 	public static boolean fileExist(String name){
@@ -152,41 +136,18 @@ public class Activity_Manuals extends ActivityBase {
 		
 		return "";
 	}
-
-/*	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu_help, menu);
-		return true;
-	}
-
+	
+	 @Override
+	 public void onActivityCreated (Bundle savedInstanceState) {
+		 super.onActivityCreated(savedInstanceState);
+		 // Indicate that this fragment would like to influence the set of actions in the action bar.
+		 setHasOptionsMenu(true);
+	 }
+	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	} */
-
-	@Override
-	public Toolbar getToolBar() {
-		// TODO Auto-generated method stub
-		return mToolBar;
-	}
-
-	@Override
-	public String getActionBarTitle() {
-		// TODO Auto-generated method stub
-		return TITLE;
-	}
-
-	@Override
-	public void actionBarRefresh() {
-		// TODO Auto-generated method stub
-		
+	public void onPrepareOptionsMenu(Menu menu){
+		MenuItem refresh = menu.findItem(R.id.action_main_refresh);
+		refresh.setEnabled(false)
+				.setVisible(false);
 	}
 }

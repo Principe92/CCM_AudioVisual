@@ -39,32 +39,36 @@ import android.widget.Toast;
  * @author Princewill Okorie
  *
  */
-public class Fragment_Web extends Fragment{
+public class Fragment_Turnos extends Fragment{
 	
-	public static final String ARG = "webpage";
+	public static final String WEB_URL = "webpage";
 	private static final String ENCODING = "windows-1252";
-	private static String TAG = Fragment_Web.class.getSimpleName();
+	private static String TAG = Fragment_Turnos.class.getSimpleName();
+	
+	// URL's
+	public static String URL_CAMERA;
+	public static String URL_PROYECCION;
+	public static String URL_DISCOS;
 	
 	// WebView variables
-	private static String sWebViewURL;
-	private static WebView schedule;
-	private static WebListener weblistener;
+	private String mWebViewURL;
+	private WebView schedule;
+	private WebListener mCallback;
 	
 	private MultiSwipeRefreshLayout mSwipeRefreshLayout;
 	private ProgressBar mProgress;
 	
 	
-	
-	public static Fragment_Web newInstance(String mURL){
-		final Fragment_Web mWebPage = new Fragment_Web();
+	public static Fragment_Turnos newInstance(String mURL){
+		final Fragment_Turnos mWebPage = new Fragment_Turnos();
 		Bundle mBundle = new Bundle();
-		mBundle.putString(ARG, mURL);
+		mBundle.putString(WEB_URL, mURL);
 		mWebPage.setArguments(mBundle);
 		return mWebPage;
 	}
 	
 	public String getURL(){
-		return getArguments().getString(ARG);
+		return getArguments().getString(WEB_URL);
 	}
 	
 	
@@ -72,6 +76,8 @@ public class Fragment_Web extends Fragment{
     public interface WebListener {
         /** Detects when an error occurred while downloading page*/
         public void onPageError();
+        
+        public String onPageStarted();
     }
 	
 	@Override
@@ -79,22 +85,18 @@ public class Fragment_Web extends Fragment{
         super.onAttach(activity);
         
         try {
-            weblistener = (WebListener) activity;
+            mCallback = (WebListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement WebListener");
         }
     }
-
 	
 	@Override
-	  public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    
-	    sWebViewURL = getArguments() != null ? getArguments().getString(ARG) : "";
-
-	    // Retain this fragment across configuration changes.
-	    setRetainInstance(true);
+	  public void onCreate(Bundle savedState) {
+	    super.onCreate(savedState);
+	    	
+	    mWebViewURL = getArguments() != null ? getArguments().getString(WEB_URL) : "";
 	  }
 	
 	
@@ -104,7 +106,13 @@ public class Fragment_Web extends Fragment{
 		FrameLayout wrapper = new FrameLayout(getActivity()); 
 		View view = inflater.inflate(R.layout.layout_web, wrapper, true);
 		
-        // Retrieve the SwipeRefreshLayout and GridView instances
+        setUp(view);
+	    
+		return view;
+	}
+	
+	private void setUp(View view){
+		// Retrieve the SwipeRefreshLayout and GridView instances
         mSwipeRefreshLayout = (MultiSwipeRefreshLayout) view.findViewById(R.id.swiperefresh);
         
         // Set the color scheme of the SwipeRefreshLayout by providing 4 color resource ids
@@ -114,40 +122,16 @@ public class Fragment_Web extends Fragment{
 		
         mProgress = (ProgressBar) view.findViewById(R.id.web_progress);
         
+        // Initialize the WebView
 		schedule = (WebView) view.findViewById(R.id.text_audio_main);
-		schedule.setWebViewClient(new WebViewClient(){
-			public void onPageStarted(WebView view, String url, Bitmap favicon){
-				// hide the webView
-				schedule.setVisibility(View.INVISIBLE);
-				mProgress.setVisibility(View.VISIBLE);
-				
-				Log.i(TAG, "starting download at: " + Tool.time());
-			}
-			
-			public void onPageFinished(WebView view, String url){	
-		        // Stop the refreshing indicator
-		        mSwipeRefreshLayout.setRefreshing(false);
-		        
-		        // show the webView
-				schedule.setVisibility(View.VISIBLE);
-				mProgress.setVisibility(View.INVISIBLE);
-				
-				Log.i(TAG, "finished downloading at: " + Tool.time());
-			}
-			
-			public void onReceivedError(WebView view, int errorCod, String description, String failingUrl) {
-	            weblistener.onPageError();
-	        }
-		});
-		
-		
+	    schedule.getSettings().setSupportZoom(true);
+	    schedule.getSettings().setBuiltInZoomControls(true);
+	    schedule.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+	    schedule.setScrollbarFadingEnabled(true);
+	    schedule.getSettings().setLoadsImagesAutomatically(true);
+	    
 		WebSettings settings = schedule.getSettings();
 		settings.setDefaultTextEncodingName(ENCODING);
-		
-		// Load web page
-	    schedule.loadUrl(sWebViewURL);
-	    
-		return view;
 	}
 	
     @Override
@@ -160,13 +144,13 @@ public class Fragment_Web extends Fragment{
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.i(TAG, "onRefresh called from SwipeRefreshLayout");
+                Log.i(TAG, "onRefreshListener launched");
                 
                 if (Tool.getInstance().isConnection()){
                 	refreshPage();
                 }
                 else{
-                	Toast.makeText(getActivity(), "No hay conexión!", Toast.LENGTH_LONG).show();
+                	Toast.makeText(getActivity(), getResources().getString(R.string.no_connection), Toast.LENGTH_LONG).show();
                 	
     		        // Stop the refreshing indicator
     		        mSwipeRefreshLayout.setRefreshing(false);
@@ -174,10 +158,44 @@ public class Fragment_Web extends Fragment{
             }
         });
         
+        schedule.setWebViewClient(new WebViewClient(){
+			public void onPageStarted(WebView view, String url, Bitmap favicon){
+				// hide the webView
+				schedule.setVisibility(View.INVISIBLE);
+				mProgress.setVisibility(View.VISIBLE);
+				
+				Log.e(TAG, "starting download at: " + Tool.time());
+			}
+			
+			public void onPageFinished(WebView view, String url){	
+		        // Stop the refreshing indicator
+		        mSwipeRefreshLayout.setRefreshing(false);
+		        
+		        // show the webView
+				schedule.setVisibility(View.VISIBLE);
+				mProgress.setVisibility(View.INVISIBLE);
+				
+				Log.e(TAG, "finished downloading at: " + Tool.time());
+			}
+			
+			public void onReceivedError(WebView view, int errorCod, String description, String failingUrl) {
+	            mCallback.onPageError();
+	        }
+		});
+        
+    }
+    
+    @Override
+    public void onActivityCreated (Bundle savedState) {
+        super.onActivityCreated(savedState);
+        
+        // Load the URL Page
+        mWebViewURL = mCallback.onPageStarted();
+        schedule.loadUrl(mWebViewURL);
     }
 	
 	public void loadPage(String address){
-		sWebViewURL = address;
+		mWebViewURL = address;
 		schedule.loadUrl(address);
 	}
 	

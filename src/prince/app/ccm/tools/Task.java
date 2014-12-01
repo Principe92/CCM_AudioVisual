@@ -32,7 +32,7 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
-import prince.app.ccm.Activity_Schedule;
+import prince.app.ccm.delete.Activity_Schedule;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
