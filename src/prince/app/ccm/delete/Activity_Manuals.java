@@ -11,7 +11,7 @@ import prince.app.ccm.R.layout;
 import prince.app.ccm.R.string;
 import prince.app.ccm.tools.ActivityBase;
 import prince.app.ccm.tools.ManualAdapter;
-import prince.app.ccm.tools.ManualCards;
+import prince.app.ccm.tools.ManualHolder;
 import prince.app.ccm.tools.Tool;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -52,12 +52,12 @@ public class Activity_Manuals extends ActivityBase {
 		initNavigationDrawer();
 	}
 	
-	private ArrayList<ManualCards> createList() {
-		ArrayList<ManualCards> result = new ArrayList<ManualCards>();
+	private ArrayList<ManualHolder> createList() {
+		ArrayList<ManualHolder> result = new ArrayList<ManualHolder>();
 		String[] titles = getResources().getStringArray(R.array.array_manuals);
 		
 		for (int i=0; i < titles.length; i++) {
-			ManualCards ci = new ManualCards();
+			ManualHolder ci = new ManualHolder();
 			ci.mManualImage = getResources().getDrawable(R.drawable.manual2); // fetchImage(i);
 			ci.mManualTitle = titles[i];
 			ci.mURL = fetchURL(i);

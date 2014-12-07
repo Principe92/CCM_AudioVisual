@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content" >
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@color/teal_500" >
+
+		<ImageView
+			android:id="@+id/image_worker_details"
+			android:layout_width="fill_parent"
+			android:layout_height="200dp"
+			android:layout_alignParentTop="true"
+			android:layout_centerHorizontal="true"
+			android:clickable="true"
+			android:contentDescription="@string/imageworker"
+			android:scaleType="centerCrop"
+			android:src="@drawable/test_image" />
+
+		<prince.app.ccm.widget.CustomFont
+			xmlns:font="http://schemas.android.com/apk/res/prince.app.ccm"
+			android:id="@+id/text_worker_id"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignBottom="@+id/image_worker_details"
+			android:layout_centerHorizontal="true"
+			android:layout_marginBottom="22dp"
+			android:text="@string/unknown"
+			android:textColor="@android:color/white"
+			android:textSize="24sp"
+			font:typeface="Roboto-Medium.ttf" />
+
+		<ImageView
+			android:id="@+id/image_group"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignLeft="@+id/image_worker_details"
+			android:layout_alignStart="@+id/image_worker_details"
+			android:layout_below="@+id/image_worker_details"
+			android:layout_marginLeft="16dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="16dp"
+			android:contentDescription="@string/icon"
+			android:src="@drawable/ic_group_white_24dp" />
+
+		<prince.app.ccm.widget.CustomFont
+			xmlns:font="http://schemas.android.com/apk/res/prince.app.ccm"
+			android:id="@+id/text_worker_role"
+			style="@style/WorkerStyle"
+			android:layout_alignTop="@+id/image_group"
+			android:layout_marginLeft="16dp"
+			android:layout_marginStart="16dp"
+			android:layout_toEndOf="@+id/image_group"
+			android:layout_toRightOf="@+id/image_group"
+			font:typeface="Roboto-Regular.ttf" />
+
+		<ImageView
+			android:id="@+id/image_number"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignLeft="@+id/image_group"
+			android:layout_alignStart="@+id/image_group"
+			android:layout_below="@+id/image_group"
+			android:layout_marginTop="32dp"
+			android:contentDescription="@string/icon"
+			android:src="@drawable/ic_call_white_24dp" />
+
+		<prince.app.ccm.widget.CustomFont
+			xmlns:font="http://schemas.android.com/apk/res/prince.app.ccm"
+			android:id="@+id/text_worker_number"
+			style="@style/WorkerStyle"
+			android:layout_alignLeft="@+id/text_worker_role"
+			android:layout_alignStart="@+id/text_worker_role"
+			android:layout_alignTop="@+id/image_number"
+			font:typeface="Roboto-Regular.ttf" />
+
+		<ImageView
+			android:id="@+id/image_email"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignLeft="@+id/image_group"
+			android:layout_alignStart="@+id/image_group"
+			android:layout_below="@+id/image_number"
+			android:layout_marginTop="32dp"
+			android:contentDescription="@string/icon"
+			android:src="@drawable/ic_email_white_24dp" />
+
+		<prince.app.ccm.widget.CustomFont
+			xmlns:font="http://schemas.android.com/apk/res/prince.app.ccm"
+			android:id="@+id/text_worker_email"
+			style="@style/WorkerStyle"
+			android:layout_alignLeft="@+id/text_worker_role"
+			android:layout_alignStart="@+id/text_worker_role"
+			android:layout_alignTop="@+id/image_email"
+			font:typeface="Roboto-Regular.ttf" />
+
+		<ImageView
+			android:id="@+id/image_address"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignLeft="@+id/image_email"
+			android:layout_alignStart="@+id/image_email"
+			android:layout_below="@+id/image_email"
+			android:layout_marginBottom="16dp"
+			android:layout_marginTop="32dp"
+			android:contentDescription="@string/icon"
+			android:src="@drawable/ic_location_city_white_24dp" />
+
+		<prince.app.ccm.widget.CustomFont
+			xmlns:font="http://schemas.android.com/apk/res/prince.app.ccm"
+			android:id="@+id/text_worker_address"
+			style="@style/WorkerStyle"
+			android:layout_alignLeft="@+id/text_worker_role"
+			android:layout_alignStart="@+id/text_worker_role"
+			android:layout_alignTop="@+id/image_address"
+			android:layout_marginBottom="16dp"
+			font:typeface="Roboto-Regular.ttf" />
+
+		<ImageButton
+			android:id="@+id/btn_dismiss"
+			style="?android:buttonBarButtonStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true"
+			android:layout_alignParentTop="true"
+			android:contentDescription="@string/btn_back"
+			android:src="@drawable/ic_arrow_back_white_24dp" />
+	</RelativeLayout>
+
+</ScrollView>

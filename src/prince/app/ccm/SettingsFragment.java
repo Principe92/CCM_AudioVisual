@@ -24,9 +24,9 @@ import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
-import android.support.v4.preference.PreferenceFragment;
 
 /**
  * Fragment showing the settings of the application

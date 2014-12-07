@@ -87,7 +87,7 @@ public class Network extends Fragment{
 	    }); 
 		
 		mRetryButton = (Button) view.findViewById(R.id.btn_retry);
-		mCheckButton = (Button) view.findViewById(R.id.btn_check_network);
+	//	mCheckButton = (Button) view.findViewById(R.id.btn_check_network);
 		mRetryButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 		          mListener.onNetworkRetry();

@@ -1,48 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<prince.app.ccm.util.MultiSwipeRefreshLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swiperefresh"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#D4CFCF"
-    android:orientation="vertical" >
-    
-    <RelativeLayout
-        android:id="@+id/web_frame"
-        android:layout_width = "match_parent"
-        android:layout_height="match_parent">
-	    
-	    <WebView
-	    	android:id= "@+id/text_audio_main"
-	    	android:layout_width="fill_parent"
-	    	android:layout_height="fill_parent"
-	    	android:text="@string/test"
-	    	android:visibility="gone"
-	    	android:gravity="center_horizontal|center_vertical" />
+<prince.app.ccm.util.MultiSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/swiperefresh"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="#D4CFCF"
+	android:orientation="vertical" >
 
-	    <ProgressBar
-	        android:id="@+id/web_progress"
-	        style="@android:style/Widget.Holo.ProgressBar.Large"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_centerHorizontal="true"
-	        android:layout_centerVertical="true"
-	        android:indeterminate="true" />
+	<RelativeLayout
+		android:id="@+id/web_frame"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent" >
 
-	    <ImageButton
-	        android:id="@+id/btn_contact_call"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentBottom="true"
-	        android:layout_alignParentRight="true"
-	        android:layout_alignParentEnd="true"
-	        android:layout_marginBottom="28dp"
-	        android:layout_marginRight="28dp"
-	        android:layout_marginEnd="28dp"
-	        android:contentDescription="@string/options"
-	        android:background="@drawable/circle"
-	        android:visibility="gone"
-	        android:src="@drawable/ic_add_white_24dp"/>
-    
-    </RelativeLayout>
+		<WebView
+			android:id="@+id/text_audio_main"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:gravity="center_horizontal|center_vertical"
+			android:text="@string/test"
+			android:visibility="gone" />
+
+		<ProgressBar
+			android:id="@+id/web_progress"
+			style="@android:style/Widget.Holo.ProgressBar.Large"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerHorizontal="true"
+			android:layout_centerVertical="true"
+			android:indeterminate="true" />
+
+		<ViewStub
+			android:id="@+id/stub_internet"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:inflatedId="@+id/viewstub_internet"
+			android:layout="@layout/layout_nowifi" />
+	</RelativeLayout>
+
 </prince.app.ccm.util.MultiSwipeRefreshLayout>

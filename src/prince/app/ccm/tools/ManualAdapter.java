@@ -4,20 +4,20 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import prince.app.ccm.Dialog_OnlyRetry;
+import prince.app.ccm.Dialog_OnlyRetry.DialogCallback;
 import prince.app.ccm.R;
 import prince.app.ccm.delete.Activity_Manuals;
+import prince.app.ccm.tools.ManualTask.AsyncCallback;
 import prince.app.ccm.util.InstallAPP;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -33,39 +33,73 @@ import android.widget.Toast;
 
 public class ManualAdapter extends RecyclerView.Adapter<ManualAdapter.ManualViewHolder>{
 	
-	private ArrayList<ManualCards> manualList;
+	private ArrayList<ManualHolder> manualList;
 	private ArrayList<String> ongoingTasks;
 	private ActionBarActivity context;
+	
 	private static final String TAG = ManualAdapter.class.getSimpleName();
+	private static final String NETWORK_TAG = "net_error";
+	
 	private ManualTask mManualTask;
-	private String noConnection;
 	private static final String TASK_ID = "Task_";
 	
-	public ManualAdapter(ArrayList<ManualCards> list, ArrayList<String> activeTask, ActionBarActivity ct){
+	public ManualAdapter(ArrayList<ManualHolder> list, ArrayList<String> activeTask, ActionBarActivity ct){
 		this.manualList = list;
 		this.context = ct;
-		noConnection = ct.getResources().getString(R.string.no_connection);
 		ongoingTasks = activeTask;
+		setUpListener();
 	}
 	
-	public ManualAdapter(ArrayList<ManualCards> list, ActionBarActivity ct){
+	public ManualAdapter(ArrayList<ManualHolder> list, ActionBarActivity ct){
 		this.manualList = list;
 		this.context = ct;
-		noConnection = ct.getResources().getString(R.string.no_connection);
 		ongoingTasks = new ArrayList<String>();
+		setUpListener();
 	}
 
 	@Override
 	public int getItemCount() {
 		return manualList.size();
 	}
+	
+	public void setUpListener(){
+		ManualTask.setCallback(new AsyncCallback(){
+
+			@Override
+			public void onPostExecute(int position, boolean mOpenFile, File mFileName, boolean success, boolean cancel) {
+				if (!cancel && !Tool.EXIT_TASK){
+					if (success){
+						if (mOpenFile && mFileName != null){
+							openPDF(mFileName);
+						}
+						if (!mOpenFile) Toast.makeText(context, "Archivo actualizado", Toast.LENGTH_SHORT).show();
+					}
+						
+					else errorHandler();
+				}
+
+				boolean modified = ongoingTasks.remove(TASK_ID + position);
+				Log.e(TAG, "Value: " + modified);
+				notifyItemChanged(position);
+				
+			}
+
+			@Override
+			public void onCancel(int position) {
+				mManualTask = null;
+				ongoingTasks.remove(TASK_ID + position);
+				notifyItemChanged(position);
+				
+			}
+			
+		});
+	}
 
 	@Override
 	public void onBindViewHolder(ManualViewHolder viewHolder, int position) {
-		final ManualCards row = manualList.get(position);
+		final ManualHolder row = manualList.get(position);
 		final ManualViewHolder mHolder = viewHolder;
 		final int index = position;
-		Log.e(TAG, "create: " + position);
 		
 		mHolder.mImage.setImageDrawable(row.mManualImage);
 		mHolder.mTitle.setText(row.mManualTitle);
@@ -80,18 +114,10 @@ public class ManualAdapter extends RecyclerView.Adapter<ManualAdapter.ManualView
 						openPDF(new File(Tool.APP_DIR,row.mFileName));
 					} else{
 						if (!ongoingTasks.contains(TASK_ID + index)){
-							if (Tool.getInstance().isConnection()){
-								Log.e(TAG, "Downloading - Filename: " + row.mFileName);
-								mManualTask = new ManualTask(new File(Tool.APP_DIR,row.mFileName), true, mHolder.mProgress, index);
-								mManualTask.execute(row.mURL);
-								ongoingTasks.add(TASK_ID + index);
-							}
-							
-							else {
-								Toast.makeText(context, noConnection, Toast.LENGTH_LONG).show();
-							}
-						/*	DialogFragment dialog = new ManualDialog(mManualTask,row.mURL);
-							dialog.show(context.getSupportFragmentManager(), TAG); */
+							Log.e(TAG, "Downloading - Filename: " + row.mFileName);
+							mManualTask = new ManualTask(new File(Tool.APP_DIR,row.mFileName), true, mHolder.mProgress, index);
+							mManualTask.execute(row.mURL);
+							ongoingTasks.add(TASK_ID + index);
 						}
 					}
 				} else{
@@ -104,17 +130,11 @@ public class ManualAdapter extends RecyclerView.Adapter<ManualAdapter.ManualView
 
 			@Override
 			public void onClick(View v) {
-				if (Tool.getInstance().isConnection()){
-					if (!ongoingTasks.contains(TASK_ID + index)){
-						Log.e(TAG, "Updating - Filename: " + row.mFileName);
-						mManualTask = new ManualTask(new File(Tool.APP_DIR,row.mFileName), false, mHolder.mProgress, index);
-						mManualTask.execute(row.mURL);
-						ongoingTasks.add(TASK_ID + index);
-					}
-				}
-				
-				else {
-					Toast.makeText(context, noConnection, Toast.LENGTH_LONG).show();
+				if (!ongoingTasks.contains(TASK_ID + index)){
+					Log.e(TAG, "Updating - Filename: " + row.mFileName);
+					mManualTask = new ManualTask(new File(Tool.APP_DIR,row.mFileName), false, mHolder.mProgress, index);
+					mManualTask.execute(row.mURL);
+					ongoingTasks.add(TASK_ID + index);
 				}
 			}});
 		
@@ -171,16 +191,65 @@ public class ManualAdapter extends RecyclerView.Adapter<ManualAdapter.ManualView
 		context.startActivity(intent);
 	}
 	
+	private void errorHandler(){
+		String msg;
+		if (!Tool.getInstance().isConnection()){
+			msg = context.getResources().getString(R.string.no_connection);
+		} else {
+			msg = context.getResources().getString(R.string.connection_error);
+		}
+		
+		FragmentTransaction ft = context.getSupportFragmentManager().beginTransaction();
+		Fragment prev = context.getSupportFragmentManager().findFragmentByTag(NETWORK_TAG);
+		if (prev != null) ft.remove(prev);
+		
+		
+		Dialog_OnlyRetry df = Dialog_OnlyRetry.newInstance(msg);
+		df.setCallback(new DialogCallback(){
+
+			@Override
+			public void onRetry() {
+				Toast.makeText(context, "RETRY", Toast.LENGTH_SHORT).show();
+				
+			}
+			
+		});
+		
+		df.show(ft, NETWORK_TAG);
+		// TODO: Still have to work on asynctask showing dialog when the activity have passed its onSavedState
+	}
+	
+	public void dismissDialogs(){
+		FragmentTransaction ft = context.getSupportFragmentManager().beginTransaction();
+		Fragment prev = context.getSupportFragmentManager().findFragmentByTag(NETWORK_TAG);
+		if (prev != null){
+			Log.e(TAG, "fragment removed");
+			ft.remove(prev);
+		}
+		
+		ft.commit();
+	}
+	
 	/**
-	 * Asynchronous Task Class to handle downloads of manuals
+	 * Asynchronous task class to handle downloads of manuals
 	 * @author Principe
 	 *
 	 */
-	public class ManualTask extends AsyncTask<String, Void, Boolean>{
+/*	private class ManualTask extends AsyncTask<String, Void, Boolean>{
 		private File mFileName;
 		private boolean mOpenFile;
 		private ProgressBar mTaskProgress;
 		private int mIndexOfCard;
+		
+		private DialogCallback mCallback;
+		
+		public static interface DialogCallback{
+			public void onRetry();
+		}
+		
+		public void setCallback(DialogCallback callback){
+			mCallback = callback;
+		}
 		
 		public ManualTask(final File name, final boolean show, ProgressBar progress, int position){
 			this.mOpenFile = show;
@@ -211,10 +280,9 @@ public class ManualAdapter extends RecyclerView.Adapter<ManualAdapter.ManualView
 					if (!mOpenFile) Toast.makeText(context, "Archivo actualizado", Toast.LENGTH_SHORT).show();
 				}
 					
-				else Toast.makeText(context, "Error descargando archivo", Toast.LENGTH_SHORT).show();
+				else errorHandler();
 			}
-				
-			mManualTask = null;
+
 			boolean modified = ongoingTasks.remove(TASK_ID + mIndexOfCard);
 			Log.e(TAG, "Value: " + modified);
 			notifyItemChanged(mIndexOfCard);
@@ -226,40 +294,13 @@ public class ManualAdapter extends RecyclerView.Adapter<ManualAdapter.ManualView
 			ongoingTasks.remove(TASK_ID + mIndexOfCard);
 			notifyItemChanged(mIndexOfCard);
 		}		
-	}
+	} */
 	
-	public class ManualDialog extends DialogFragment {
-		private ManualTask mManualTask;
-		private String URL;
-		
-		public ManualDialog(ManualTask task, String address){
-			this.mManualTask = task;
-			this.URL = address;
-		}
-		
-	    @Override
-	    public Dialog onCreateDialog(Bundle savedInstanceState) {
-	        // Use the Builder class for convenient dialog construction
-	        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-	        builder.setMessage(R.string.download_manual)
-	               .setPositiveButton(R.string.pdf_positive, new DialogInterface.OnClickListener() {
-	                   public void onClick(DialogInterface dialog, int id) {
-	                       if (mManualTask != null && URL != null && !URL.isEmpty()){
-	                    	   mManualTask.execute(URL);
-	                       }
-	                   }
-	               })
-	               .setNegativeButton(R.string.pdf_negative, new DialogInterface.OnClickListener() {
-	                   public void onClick(DialogInterface dialog, int id) {
-	                	   mManualTask.cancel(true);
-	                       getDialog().dismiss();
-	                   }
-	               });
-	        // Create the AlertDialog object and return it
-	        return builder.create();
-	    }
-	}
-	
+	/**
+	 * ViewHolder class for the each manual
+	 * @author Prince O.
+	 *
+	 */
 	public final static class ManualViewHolder extends RecyclerView.ViewHolder{
 		protected ImageView mImage;
 		protected TextView mTitle;

@@ -1,140 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CCM AudioVisual</string>
-    <string name="drawer_photo">cover photo</string>
-    <string name="test">Schedule</string>
-    <string name="drawer_open">open drawer</string>
-    <string name="drawer_close">close drawer</string>
+	<string name="app_name">CCM AudioVisual</string>
+	<string name="drawer_photo">cover photo</string>
+	<string name="test">Schedule</string>
+	<string name="drawer_open">open drawer</string>
+	<string name="drawer_close">close drawer</string>
 
-    <string-array name="array_turnos">
-        <item>Grabación Palma</item>
-        <item>Proyección Palma</item>
-        <item>Discos Palma</item>
-    </string-array>
-    
-    <string-array name="array_navigation">
-        <item>Turnos</item>
-        <item>Manuales</item>
-        <item>Contactos</item>
-    </string-array>
-    
-    <string-array name="actionBarTitles">
-        <item>Grabación</item>
-        <item>Proyección</item>
-        <item>Discos</item>
-        <item>Zonas</item>
-    </string-array>
-    
-    <string-array name="array_manuals">
-        <item>Escala de planos audiovisual CCM</item>
-        <item>Zonas de filmación de iglesia de Palma</item>
-        <item>Tomas útiles</item>
-        <item>Montaje La Salle - 13/02/2011</item>
-        <item>Montaje La Salle - 14/08/2011</item>
-        <item>Conexión La Salle - 14/08/2011</item>
-        <item>Publicación predicación web</item>
-        <item>Flash CS3</item>
-        <item>Tomas videos frecuentes CCM</item>
-        <item>Glosario de Cine</item>
-        <item>Camara HDV Sony HVR-A1E</item>
-        <item>Introducción a XHTML</item>
-        <item>Casa Blanca Smart Edit</item>
-        <item>Proyector LCD XL5980U</item>
-    </string-array>
-    
-    <string-array name="array_contact">
-        <item>Audiovisual</item>
-        <item>Antonio Herrera Peña</item>
-        <item>Vanessa Herrera</item>
-        <item>Óscar Malagón Alvarez</item>
-    </string-array>
-    
-    <string-array name="array_numbers">
-        <item>971&#8211;906&#8211;785</item>
-        <item>610&#8211;394&#8211;706+971&#8211;734&#8211;363</item>
-        <item>Unknown</item>
-        <item>685&#8211;553&#8211;888</item>
-    </string-array>
-    
-    <string-array name="array_emails">
-        <item>audiovisual@iglesiamallorca.com</item>
-        <item>herrera1954@gmail.com</item>
-        <item>app@gmail.com+appccm@outlook.com</item>
-        <item>oscardemallorca@gmail.com</item>
-    </string-array>
-    
-    <string-array name="array_role">
-        <item>Ministerio</item>
-        <item>Responsable de grabación</item>
-        <item>Responsable de proyección</item>
-        <item>Técnico audiovisual</item>
-    </string-array>
-    
-    <string name="escaladeplanos_av">http://www.iglesiamallorca.com/audiovisual/manuales/escaladeplanos_av.pdf</string>
-    <string name="zonas_filmacion_pm">http://www.iglesiamallorca.com/audiovisual/manuales/zonas_filmacion_pm.pdf</string>
-    <string name="tomasutiles_110424">http://www.iglesiamallorca.com/audiovisual/manuales/tomasutiles_110424.pdf</string>
-    <string name="salle_montaje_110213">http://www.iglesiamallorca.com/audiovisual/manuales/salle_montaje_110213.pdf</string>
-    <string name="salle_montaje_110814">http://www.iglesiamallorca.com/audiovisual/manuales/salle_montaje_110814.pdf</string>
-    <string name="salle_conexionado_110814">http://www.iglesiamallorca.com/audiovisual/manuales/salle_conexionado_110814.pdf</string>
-    <string name="publicacion_predicaciones_web">http://www.iglesiamallorca.com/audiovisual/manuales/publicacion_predicaciones_web.pdf</string>
-    <string name="flash">http://www.aulaclic.es/flashcs3/index.htm</string>
-    <string name="tomas_frecuentes_pm">http://www.iglesiamallorca.com/audiovisual/manuales/tomas_frecuentes_pm.pdf</string>
-    <string name="glosariodecine_av">http://www.iglesiamallorca.com/audiovisual/manuales/glosariodecine_av.pdf</string>
-    <string name="camara_sony">http://www.iglesiamallorca.com/audiovisual/manuales/camara_sony.pdf</string>
-    <string name="introduccion_xhtml">http://www.iglesiamallorca.com/audiovisual/manuales/introduccion_xhtml.pdf</string>
-    <string name="editor_casablanca">http://www.iglesiamallorca.com/audiovisual/manuales/editor_casablanca.pdf</string>
-    <string name="proyector_lcd_xl5980u">http://www.iglesiamallorca.com/audiovisual/manuales/mitsubishi_proyector/XL5980U_5900U_Esp.pdf</string>
-    
+	<string-array name="array_turnos">
+		<item>Grabación Palma</item>
+		<item>Proyección Palma</item>
+		<item>Discos Palma</item>
+	</string-array>
+	<string-array name="array_navigation">
+		<item>Turnos</item>
+		<item>Manuales</item>
+		<item>Contactos</item>
+		<item>Obreros</item>
+	</string-array>
+	<string-array name="actionBarTitles">
+		<item>Grabación</item>
+		<item>Proyección</item>
+		<item>Discos</item>
+		<item>Zonas</item>
+	</string-array>
+	<string-array name="array_manuals">
+		<item>Escala de planos audiovisual CCM</item>
+		<item>Zonas de filmación de iglesia de Palma</item>
+		<item>Tomas útiles</item>
+		<item>Montaje La Salle - 13/02/2011</item>
+		<item>Montaje La Salle - 14/08/2011</item>
+		<item>Conexión La Salle - 14/08/2011</item>
+		<item>Publicación predicación web</item>
+		<item>Flash CS3</item>
+		<item>Tomas videos frecuentes CCM</item>
+		<item>Glosario de Cine</item>
+		<item>Camara HDV Sony HVR-A1E</item>
+		<item>Introducción a XHTML</item>
+		<item>Casa Blanca Smart Edit</item>
+		<item>Proyector LCD XL5980U</item>
+	</string-array>
+	<string-array name="array_contact">
+		<item>Audiovisual</item>
+		<item>Antonio Herrera Peña</item>
+		<item>Vanessa Herrera</item>
+		<item>Óscar Malagón Alvarez</item>
+	</string-array>
+	<string-array name="array_numbers">
+		<item>971&#8211;906&#8211;785</item>
+		<item>610&#8211;394&#8211;706+971&#8211;734&#8211;363</item>
+		<item>Unknown</item>
+		<item>685&#8211;553&#8211;888</item>
+	</string-array>
+	<string-array name="array_emails">
+		<item>audiovisual@iglesiamallorca.com</item>
+		<item>herrera1954@gmail.com</item>
+		<item>app@gmail.com+appccm@outlook.com</item>
+		<item>oscardemallorca@gmail.com</item>
+	</string-array>
+	<string-array name="array_role">
+		<item>Ministerio</item>
+		<item>Director General</item>
+		<item>Subdirector</item>
+		<item>Director Técnico</item>
+	</string-array>
 
-    <string name="retry">Reintentar</string>
-    <string name="check_connection">Comprobar</string>
-    <string name="no_internet_image">No Internet</string>
-    <string name="load_pdf">Abrir archivo</string>
-    <string name="title_activity_visual">VisualActivity</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="no_network">Error de conexión</string>
-    <string name="Retry">Reintentar</string>
-    <string name="image">imagen</string>
+	<string name="escaladeplanos_av">http://www.iglesiamallorca.com/audiovisual/manuales/escaladeplanos_av.pdf</string>
+	<string name="zonas_filmacion_pm">http://www.iglesiamallorca.com/audiovisual/manuales/zonas_filmacion_pm.pdf</string>
+	<string name="tomasutiles_110424">http://www.iglesiamallorca.com/audiovisual/manuales/tomasutiles_110424.pdf</string>
+	<string name="salle_montaje_110213">http://www.iglesiamallorca.com/audiovisual/manuales/salle_montaje_110213.pdf</string>
+	<string name="salle_montaje_110814">http://www.iglesiamallorca.com/audiovisual/manuales/salle_montaje_110814.pdf</string>
+	<string name="salle_conexionado_110814">http://www.iglesiamallorca.com/audiovisual/manuales/salle_conexionado_110814.pdf</string>
+	<string name="publicacion_predicaciones_web">http://www.iglesiamallorca.com/audiovisual/manuales/publicacion_predicaciones_web.pdf</string>
+	<string name="flash">http://www.aulaclic.es/flashcs3/index.htm</string>
+	<string name="tomas_frecuentes_pm">http://www.iglesiamallorca.com/audiovisual/manuales/tomas_frecuentes_pm.pdf</string>
+	<string name="glosariodecine_av">http://www.iglesiamallorca.com/audiovisual/manuales/glosariodecine_av.pdf</string>
+	<string name="camara_sony">http://www.iglesiamallorca.com/audiovisual/manuales/camara_sony.pdf</string>
+	<string name="introduccion_xhtml">http://www.iglesiamallorca.com/audiovisual/manuales/introduccion_xhtml.pdf</string>
+	<string name="editor_casablanca">http://www.iglesiamallorca.com/audiovisual/manuales/editor_casablanca.pdf</string>
+	<string name="proyector_lcd_xl5980u">http://www.iglesiamallorca.com/audiovisual/manuales/mitsubishi_proyector/XL5980U_5900U_Esp.pdf</string>
+	<string name="no_internet_image">No Internet</string>
+	<string name="load_pdf">Abrir archivo</string>
+	<string name="title_activity_visual">VisualActivity</string>
+	<string name="hello_world">Hello world!</string>
+	<string name="no_network">Error de conexión</string>
+	<string name="Retry">Reintentar</string>
 
-    <!-- Activity Titles -->
-    <string name="title_activity_log">Autenticación</string>
-    <string name="title_activity_settings">Ajustes</string>
-    <string name="text_edition_number">Noviembre 13, 2014</string>
-    <string name="text_turn">1</string>
-    <string name="text_role">Papel:</string>
-    <string name="text_last_updated">Actualizado:</string>
-    <string name="text_date">Edicción:</string>
-    <string name="text_notes">Evento:</string>
-    <string name="text_note_see">Ver</string>
-    <string name="text_note_on">Hay notas</string>
-    <string name="text_note_off">No hay notas</string>
-    <string name="unknown">Ninguno</string>
-    <string name="options">opciones</string>
-    <string name="title_activity_activity__help">Ayuda</string>
-    <string name="drawer_open_title">Menú</string>
-    
-    <!-- Button Texts -->
-    <string name="btn_open">ABRIR</string>
-    <string name="btn_update">ACTUALIZAR</string>
-    <string name="btn_call">LLAMAR</string>
-    <string name="btn_message">ENVIAR MENSAJE</string>
-    <string name="btn_email">ENVIAR CORREO</string>
-    <string name="btn_cancel">CANCELAR</string>
-    
-    <!-- Dialog Texts -->
-    <string name="number_choose">Marca un numero de telefono</string>
-    <string name="email_choose">Marca los destinatarios</string>
-    <string name="pdf_header">Error abriendo archivo</string>
-    <string name="pdf_positive">Si</string>
-    <string name="pdf_negative">No</string>
-    <string name="pdf_message">No existe una applicación en tu dispositivo para ver el archivo. \n¿Quieres instalar uno de Google Play?</string>
-    <string name="download_manual">¿Usted quiere descargar el archivo?</string>
-    
-    <!-- Toast messages -->
-    <string name="no_connection">No hay conexión !</string>
-    <string name="call_failed">Ha occurrido un error</string>
-    <string name="email_failed">No hay aplicación de correo electrónico instalada</string>
-    <string name="no_google_store">El Google Play Store no está instalado !</string>
+	<!-- Activity Titles -->
+	<string name="title_activity_log">Autenticación</string>
+	<string name="title_activity_settings">Ajustes</string>
+	<string name="text_edition_number">Noviembre 13, 2014</string>
+	<string name="text_turn">1</string>
+	<string name="text_role">Papel:</string>
+	<string name="text_last_updated">Actualizado:</string>
+	<string name="text_date">Edicción:</string>
+	<string name="text_notes">Evento:</string>
+	<string name="text_note_see">Ver</string>
+	<string name="text_note_on">Hay notas</string>
+	<string name="text_note_off">No hay notas</string>
+	<string name="unknown">Ninguno</string>
+	<string name="options">opciones</string>
+	<string name="title_activity_activity__help">Ayuda</string>
+	<string name="drawer_open_title">Menú</string>
+
+	<!-- Button Texts -->
+	<string name="btn_open">ABRIR</string>
+	<string name="btn_update">ACTUALIZAR</string>
+	<string name="btn_call">LLAMAR</string>
+	<string name="btn_message">ENVIAR MENSAJE</string>
+	<string name="btn_email">ENVIAR CORREO</string>
+	<string name="btn_cancel">CANCELAR</string>
+	<string name="btn_settings">AJUSTES</string>
+	<string name="btn_retry">REINTENTAR</string>
+	<string name="btn_desactivate">DESACTIVAR</string>
+
+	<!-- Dialog Texts -->
+	<string name="number_choose">Llamar al &#8230;</string>
+	<string name="email_choose">Enviar correo al &#8230;</string>
+	<string name="email_app_choose">Enviar correo con &#8230;</string>
+	<string name="pdf_header">Error abriendo archivo</string>
+	<string name="connection_error">Error de conexión</string>
+	<string name="pdf_positive">Si</string>
+	<string name="pdf_negative">No</string>
+	<string name="pdf_message">No existe una applicación en tu dispositivo para ver el archivo. \n¿Quieres instalar uno de Google Play?</string>
+	<string name="download_manual">¿Usted quiere descargar el archivo?</string>
+	<string name="airplane_mode_on">Modo avión está activado</string>
+	<string name="send_email_indicator">Enviar correo con &#8230;</string>
+	<string name="user_passwd_error">Usuario o contraseña incorrecta</string>
+
+	<!-- Toast messages -->
+	<string name="no_connection">No hay conexión</string>
+	<string name="call_failed">Ha occurrido un error</string>
+	<string name="email_failed">No hay aplicación de correo electrónico instalada</string>
+	<string name="no_google_store">El Google Play Store no está instalado</string>
+	<string name="file_updated">Archivo actualizado</string>
+	<string name="error_updating_file">Ha occurrido</string>
+	<string name="message_failed">No hay aplicación de mensaje instalado</string>
+	<string name="spinner_prompt">Elije un turno</string>
+
+	<!-- Image Descriptions -->
+	<string name="image">imagen</string>
+	<string name="imageworker">imagen de obrero</string>
+	<string name="icon">icono</string>
+	<string name="btn_back">Ir atrás</string>
 
 </resources>

@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import prince.app.ccm.tools.ManualAdapter;
-import prince.app.ccm.tools.ManualCards;
+import prince.app.ccm.tools.ManualHolder;
 import prince.app.ccm.tools.Tool;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -20,22 +20,42 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class Fragment_Manuals extends Fragment {
-	private static final String TAG = Fragment_Manuals.class.getSimpleName();
+//	private static final String TAG = Fragment_Manuals.class.getSimpleName();
+	private static final String ACTIVE = "active tasks";
+	
 	private ManualAdapter manualAdapter;
+	private ArrayList<String> mActiveTasks;
+	
 	
 	public static Fragment_Manuals newInstance(){
 		final Fragment_Manuals mFragment = new Fragment_Manuals();
 		return mFragment;
+	}
+	
+	@Override
+	public void onPause(){
+		super.onPause();
+		
+		if (manualAdapter != null){
+			manualAdapter.dismissDialogs();
+		}
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle oldState){
+		super.onSaveInstanceState(oldState);
+		oldState.putStringArrayList(ACTIVE, manualAdapter.getActiveTasks());
 	}
 
 	@Override
 	public void onCreate(Bundle oldState) {
 		super.onCreate(oldState);
 		
-		// Set up adapter
-		manualAdapter = new ManualAdapter(createList(), (ActionBarActivity) getActivity());
+		if (oldState != null) mActiveTasks = oldState.getStringArrayList(ACTIVE);
+		else mActiveTasks = new ArrayList<String>();
 		
-		setRetainInstance(true);
+		// Set up adapter
+		manualAdapter = new ManualAdapter(createList(), mActiveTasks, (ActionBarActivity) getActivity());
 	}
 	
 	@Override
@@ -58,12 +78,12 @@ public class Fragment_Manuals extends Fragment {
 		recList.setAdapter(manualAdapter);
 	}
 	
-	private ArrayList<ManualCards> createList() {
-		ArrayList<ManualCards> result = new ArrayList<ManualCards>();
+	private ArrayList<ManualHolder> createList() {
+		ArrayList<ManualHolder> result = new ArrayList<ManualHolder>();
 		String[] titles = getResources().getStringArray(R.array.array_manuals);
 		
 		for (int i=0; i < titles.length; i++) {
-			ManualCards ci = new ManualCards();
+			ManualHolder ci = new ManualHolder();
 			ci.mManualImage = getResources().getDrawable(R.drawable.manual2); // fetchImage(i);
 			ci.mManualTitle = titles[i];
 			ci.mURL = fetchURL(i);

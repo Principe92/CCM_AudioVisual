@@ -1,74 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
-    <!-- WebPage Preference -->
-    <string name="pref_schedule_category">HORARIOS</string>
-    <string name="pref_schedule_category_key">pref_webpage_category_key</string>
-    <string name="pref_defaultPage_key">pref_defaultPage_key</string>
-    <string name="pref_defaultPage_summary">Seleccione su departamento</string>
-    <string name="pref_defaultPage_title">Departamento</string>
-    <string-array name="pref_cacheClearModeEntries">
-        <item>Grabación</item>
-        <item>Proyección</item>
-        <item>Discos</item>
-    </string-array>
-    
-    <string-array name="pref_cacheClearModeValues">
-        <item>video</item>
-        <item>proyeccion</item>
-        <item>discos</item>
-    </string-array>
-    <string name="pref_cacheClearMode_default">video</string>
-    <string name="cancel">Cancelar</string>
-    <string name="save">Guardar</string>
-    
-    <string name="video_url">Video URL</string>
-    <string name="proyeccion_url">Proyeccion URL</string>
-    <string name="discos_url">Discos URL</string>
-    <string name="zonas_url">Zonas URL</string>
-    
-    <string name="pref_webPage_key">pref_webPage_key</string>
-    <string name="pref_webPage_title">Modificar los enlaces del horario</string>
-    <string name="pref_webPage_summary">Pincha para modificar</string>
-    
-    <!-- video/Sonido preference -->
-    <string name="pref_videoUrl_key">pref_videoUrl_key</string>
-    <string name="pref_videoUrl_title"><b>Enlace de grabación</b></string>
-    <string name="pref_videoUrl_dialogTitle">Enlace de grabación</string>
-    <string name="pref_videoUrl_summary">current url</string>
-    <string name="pref_videoUrl_defaultValue">http://www.iglesiamallorca.com/audiovisual/grabaciones/grabaciones_turnos_pm.html</string>
-    
-    
-    <!-- Proyeccion preference -->
-    <string name="pref_proyUrl_key">pref_proyUrl_key</string>
-    <string name="pref_proyUrl_title"><b>Enlace de proyección</b></string>
-    <string name="pref_proyUrl_dialogTitle">Proyección</string>
-    <string name="pref_proyUrl_summary">current url</string>
-    <string name="pref_proyUrl_defaultValue">http://www.iglesiamallorca.com/audiovisual/proyeccion/proyeccion_servicio_pm.htm</string>
-    
+
+	<!-- WebPage Preference -->
+	<string name="pref_schedule_category">HORARIOS</string>
+	<string name="pref_schedule_category_key">pref_webpage_category_key</string>
+	<string name="pref_defaultPage_key">pref_defaultPage_key</string>
+	<string name="pref_defaultPage_summary">Seleccione su departamento</string>
+	<string name="pref_defaultPage_title">Mi departamento</string>
+
+	<string-array name="pref_cacheClearModeEntries">
+		<item>Grabación</item>
+		<item>Proyección</item>
+		<item>Discos</item>
+	</string-array>
+	<string-array name="pref_cacheClearModeValues">
+		<item>video</item>
+		<item>proyeccion</item>
+		<item>discos</item>
+	</string-array>
+
+	<string name="pref_cacheClearMode_default">video</string>
+	<string name="cancel">Cancelar</string>
+	<string name="save">Guardar</string>
+	<string name="video_url">Video URL</string>
+	<string name="proyeccion_url">Proyeccion URL</string>
+	<string name="discos_url">Discos URL</string>
+	<string name="zonas_url">Zonas URL</string>
+	<string name="pref_webPage_key">pref_webPage_key</string>
+	<string name="pref_webPage_title">Modificar los enlaces del horario</string>
+	<string name="pref_webPage_summary">Pincha para modificar</string>
+
+	<!-- video/Sonido preference -->
+	<string name="pref_videoUrl_key">pref_videoUrl_key</string>
+	<string name="pref_videoUrl_title"><b>Enlace de grabación</b></string>
+	<string name="pref_videoUrl_dialogTitle">Enlace de grabación</string>
+	<string name="pref_videoUrl_summary">current url</string>
+	<string name="pref_videoUrl_defaultValue">http://www.iglesiamallorca.com/audiovisual/grabaciones/grabaciones_turnos_pm.html</string>
+
+	<!-- Proyeccion preference -->
+	<string name="pref_proyUrl_key">pref_proyUrl_key</string>
+	<string name="pref_proyUrl_title"><b>Enlace de proyección</b></string>
+	<string name="pref_proyUrl_dialogTitle">Proyección</string>
+	<string name="pref_proyUrl_summary">current url</string>
+	<string name="pref_proyUrl_defaultValue">http://www.iglesiamallorca.com/audiovisual/proyeccion/proyeccion_servicio_pm.htm</string>
+
 	<!-- Discos preference -->
-    <string name="pref_discosUrl_key">pref_discosUrl_key</string>
-    <string name="pref_discosUrl_title"><b>Enlace de discos</b></string>
-    <string name="pref_discosUrl_dialogTitle">Discos</string>
-    <string name="pref_discosUrl_summary">current url</string>
-    <string name="pref_discosUrl_defaultValue">http://www.iglesiamallorca.com/audiovisual/discos/discos_servicio.htm</string>
-    
+	<string name="pref_discosUrl_key">pref_discosUrl_key</string>
+	<string name="pref_discosUrl_title"><b>Enlace de discos</b></string>
+	<string name="pref_discosUrl_dialogTitle">Discos</string>
+	<string name="pref_discosUrl_summary">current url</string>
+	<string name="pref_discosUrl_defaultValue">http://www.iglesiamallorca.com/audiovisual/discos/discos_servicio.htm</string>
+
 	<!-- Zonas preference -->
-    <string name="pref_zonasUrl_key">pref_zonasUrl_key</string>
-    <string name="pref_zonasUrl_title"><b>Zonas de Grabación</b></string>
-    <string name="pref_zonasUrl_dialogTitle">Zonas de Grabación</string>
-    <string name="pref_zonasUrl_summary">current url</string>
-    <string name="pref_zonasUrl_defaultValue">http://www.iglesiamallorca.com/audiovisual/manuales/zonas_filmacion_pm.pdf</string>
-    
-    <!-- App Version -->
-    <string name="pref_app_version_title">Versión</string>
-    <string name="pref_app_version_key">pref_app_version</string>
-    
-    <!-- Schedule Version -->
-    <string name="pref_version_key">pref_version</string>
-    <string name="pref_version_title">Versión web</string>
-    
-    <!-- Developer -->
+	<string name="pref_zonasUrl_key">pref_zonasUrl_key</string>
+	<string name="pref_zonasUrl_title"><b>Zonas de Grabación</b></string>
+	<string name="pref_zonasUrl_dialogTitle">Zonas de Grabación</string>
+	<string name="pref_zonasUrl_summary">current url</string>
+	<string name="pref_zonasUrl_defaultValue">http://www.iglesiamallorca.com/audiovisual/manuales/zonas_filmacion_pm.pdf</string>
+
+	<!-- App Version -->
+	<string name="pref_app_version_title">Versión</string>
+	<string name="pref_app_version_key">pref_app_version</string>
+
+	<!-- Schedule Version -->
+	<string name="pref_version_key">pref_version</string>
+	<string name="pref_version_title">Versión web</string>
+
+	<!-- Developer -->
 	<string name="pref_developer_key">pref_developer</string>
-    <string name="pref_developer_title">DESARROLLADOR</string>    
+	<string name="pref_developer_title">DESARROLLADOR</string>
+
 </resources>

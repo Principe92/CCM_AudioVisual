@@ -1,48 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    
-    <style name="AppThemeBase" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:actionBarStyle">@style/customActionBar</item>
-        <item name="android:windowDisablePreview">true</item>
-        
-        <item name="actionBarStyle">@style/customActionBar</item>
-        <item name="colorPrimary">@color/deeporange_500</item>
-    	<item name="colorPrimaryDark">@color/deeporange_700</item>
-    	<item name="colorAccent">@color/deeporange_accent</item>
-    </style>
-    
-    <style name="customActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
-        <item name="android:background">@color/deeporange_500</item>
-        
-        <item name="background">@color/deeporange_500</item>
-    </style>
-    
-    <style name="AppThemeBase.settingsTheme">
-        <item name="android:textColor">@color/grey_900</item>
-        <item name="android:textAppearance">@color/grey_900</item>
-    </style>
-        
-    <style name="AppThemeBase.ScheduleTheme" >
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        
-        <item name="windowActionBar">false</item>
-    </style>
 
-    <style name="Main" parent="Theme.AppCompat.NoActionBar"></style>
+	<style name="AppThemeBase" parent="Theme.AppCompat.Light.DarkActionBar">
+		<item name="android:actionBarStyle">@style/customActionBar</item>
+		<item name="android:windowDisablePreview">true</item>
+		<item name="android:spinnerItemStyle">@style/customSpinner</item>
+		<item name="actionBarStyle">@style/customActionBar</item>
+		<item name="colorPrimary">@color/deeporange_500</item>
+		<item name="colorPrimaryDark">@color/deeporange_700</item>
+		<item name="colorAccent">@color/deeporange_accent</item>
+	</style>
 
-    <style name="Transparent" parent="@android:style/Theme.Holo">
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:backgroundDimEnabled">false</item>
-    </style>
+	<style name="customActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
+		<item name="android:background">@color/deeporange_500</item>
+		<item name="background">@color/deeporange_500</item>
+	</style>
 
-    <style name="LoginFormContainer">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">16dp</item>
-    </style>
+	<style name="customSpinner">
+		<item name="android:textColor">@android:color/white</item>
+		<item name="android:textSize">14sp</item>
+	</style>
+
+	<style name="AppThemeBase.settingsTheme">
+		<item name="android:textColor">@color/grey_900</item>
+		<item name="android:textAppearance">@color/grey_900</item>
+	</style>
+
+	<style name="AppThemeBase.ScheduleTheme">
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowActionBar">false</item>
+		<item name="windowActionBar">false</item>
+	</style>
+
+	<style name="Main" parent="Theme.AppCompat.NoActionBar"></style>
+
+	<style name="Transparent" parent="@android:style/Theme.Holo">
+		<item name="android:windowContentOverlay">@null</item>
+		<item name="android:windowIsTranslucent">true</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:backgroundDimEnabled">false</item>
+	</style>
+
+	<style name="LoginFormContainer">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:padding">16dp</item>
+	</style>
+
+	<!-- Worker Details TextView Style -->
+	<style name="WorkerStyle">
+		<item name="android:textColor">@android:color/white</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:paddingLeft">16dp</item>
+		<item name="android:gravity">top</item>
+		<item name="android:paddingRight">16dp</item>
+		<item name="android:text">@string/unknown</item>
+	</style>
 
 </resources>

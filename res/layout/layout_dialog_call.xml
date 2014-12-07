@@ -5,7 +5,7 @@
     
 	<ListView    		
 	    android:id="@+id/list_calldialog"
-       	android:layout_width="wrap_content"
+       	android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:drawSelectorOnTop="true"
@@ -13,14 +13,14 @@
 	
 	<Button
 	    android:id="@+id/btn_cancel"
-	    android:layout_height="36dp"
-	    android:layout_width="88dp"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
 	    android:layout_below="@+id/list_calldialog"
 	    android:layout_toLeftOf="@+id/btn_call"
 	    android:layout_toStartOf="@+id/btn_call"
 	    style="?android:buttonBarButtonStyle"
 	    android:text="@string/btn_cancel"
-	    android:textColor="@color/deeporange_500"
+	    android:textColor="@color/deeporange_700"
 	    android:layout_marginTop="16dp"
 	    android:layout_marginBottom="16dp"
 	    android:contentDescription="@string/btn_cancel"/>
@@ -28,11 +28,11 @@
 	<Button
 	    android:id="@+id/btn_call"
 	    android:layout_below="@+id/list_calldialog"
-	    android:layout_height="36dp"
-	    android:layout_width="88dp"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
 	    android:layout_marginTop="16dp"
-	    android:layout_marginLeft="8dp"
-	    android:layout_marginStart="8dp"
+	    android:layout_marginLeft="16dp"
+	    android:layout_marginStart="16dp"
 	   	android:layout_marginRight="16dp"
 	    android:layout_marginEnd="16dp"
 	    android:layout_marginBottom="16dp"
@@ -40,6 +40,6 @@
 	    android:layout_alignParentEnd="true"
 	    style="?android:buttonBarButtonStyle"
 	    android:text="@string/btn_call"
-	    android:textColor="@color/deeporange_500"
+	    android:textColor="@color/teal_500"
 	    android:contentDescription="@string/btn_call"/>
 </RelativeLayout>

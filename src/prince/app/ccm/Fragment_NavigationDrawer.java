@@ -7,7 +7,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -16,7 +15,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +27,7 @@ import android.widget.TextView;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class Fragment_NavigationDrawer extends Fragment {
-	private static final String TAG = Fragment_NavigationDrawer.class.getSimpleName();
+//	private static final String TAG = Fragment_NavigationDrawer.class.getSimpleName();
 
     /**
      * Remember the position of the selected item.
@@ -88,6 +86,7 @@ public class Fragment_NavigationDrawer extends Fragment {
         
         int [] menuIcons = {R.drawable.ic_today_grey600_24dp, 
         					R.drawable.ic_assignment_grey600_24dp,
+        					R.drawable.ic_person_grey600_24dp,
         					R.drawable.ic_person_grey600_24dp};
         
         listAdapter = new ListAdapter(	getActivity(), 
@@ -95,7 +94,6 @@ public class Fragment_NavigationDrawer extends Fragment {
         								getResources().getStringArray(R.array.array_navigation),
         								menuIcons);
 
-        Log.e(TAG, "create called");
         // Select either the default item (0) or the last selected item.
         selectItem(mCurrentSelectedPosition);
     }
@@ -159,7 +157,7 @@ public class Fragment_NavigationDrawer extends Fragment {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-				getActionBar().setTitle(getResources().getString(R.string.drawer_open_title));
+				getActionBar().setTitle(onDrawerOpen);
 				mCallbacks.onDrawerOpen();
 
                 if (!mUserLearnedDrawer) {

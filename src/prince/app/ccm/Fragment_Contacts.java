@@ -26,12 +26,19 @@ public class Fragment_Contacts extends Fragment {
 		final Fragment_Contacts fc = new Fragment_Contacts();
 		return fc;
 	}
+	
+	@Override
+	public void onPause(){
+		super.onPause();
+		
+		if (contactAdapter != null){
+			contactAdapter.dismissDialogs();
+		}
+	}
 
 	@Override
 	public void onCreate(Bundle oldState) {
 		super.onCreate(oldState);
-		
-		setRetainInstance(true);
 		
 		contactAdapter = new ContactAdapter(createList(),(ActionBarActivity) getActivity());
 	}

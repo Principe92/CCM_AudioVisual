@@ -17,45 +17,42 @@
 
 <resources>
 
-    <color name="grid_state_pressed">#BB7dbcd3</color>
-    <color name="grid_state_selected">#0099CC</color>
-    <color name="grid_state_focused">#777dbcd3</color>
-    <color name="grid_background">#222222</color>
-    
-    <color name="loading_color_1">#1d3352</color>
-    <color name="loading_color_2">#f9f9f9</color>
-    <color name="loading_color_3">#33B5E5</color>
-    
-    <color name="google_bg_color">#dd4b39</color>
-    
-    
+	<color name="grid_state_pressed">#BB7dbcd3</color>
+	<color name="grid_state_selected">#0099CC</color>
+	<color name="grid_state_focused">#777dbcd3</color>
+	<color name="grid_background">#222222</color>
+	<color name="loading_color_1">#1d3352</color>
+	<color name="loading_color_2">#f9f9f9</color>
+	<color name="loading_color_3">#33B5E5</color>
+	<color name="google_bg_color">#dd4b39</color>
 	<color name="swipe_color_1">#E48B44</color>
-    <color name="swipe_color_2">#00A4D5</color>
-    <color name="swipe_color_3">#000D11</color>
-    <color name="swipe_color_4">#00384C</color>
-    <color name="swipe_color_5">#0BA0DC</color>
-    
-    <!-- Red -->
-    <color name="red_500">#F44336</color>
+	<color name="swipe_color_2">#00A4D5</color>
+	<color name="swipe_color_3">#000D11</color>
+	<color name="swipe_color_4">#00384C</color>
+	<color name="swipe_color_5">#0BA0DC</color>
+
+	<!-- Red -->
+	<color name="red_500">#F44336</color>
 	<color name="red_700">#D32F2F</color>
-	<color name="red_100">#FFCDD2</color> 
+	<color name="red_100">#FFCDD2</color>
 	<color name="red_accent">#FF5252</color>
 	<color name="red">#CD0000</color>
-	
+
 	<!-- Deep Orange -->
 	<color name="deeporange_300">#ff8a65</color>
 	<color name="deeporange_500">#FF5722</color>
 	<color name="deeporange_700">#E64A19</color>
-	<color name="deeporange_100">#FFCCBC</color> 
+	<color name="deeporange_100">#FFCCBC</color>
 	<color name="deeporange_accent">#FF3D00</color>
-	
 	<color name="grey_50">#FAFAFA</color>
 	<color name="grey_900">#212121</color>
-	
 	<color name="teal_500">#009688</color>
 	<color name="teal_300">#4db6ac</color>
-	
 	<color name="lightblue_500">#03A9F4</color>
 	<color name="schedule_color">#CDC8B1</color>
+
+	<drawable name="state_default">@android:color/transparent</drawable>
+	<drawable name="state_pressed">@color/deeporange_500</drawable>
+	<drawable name="state_focused">@color/teal_500</drawable>
 
 </resources>

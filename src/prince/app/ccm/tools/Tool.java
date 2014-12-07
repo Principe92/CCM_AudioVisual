@@ -14,16 +14,22 @@ import java.util.Date;
 import java.util.Locale;
 
 import prince.app.ccm.R;
+import android.annotation.TargetApi;
 import android.app.Application;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.util.SparseArray;
+import android.widget.Toast;
 
 public class Tool extends Application{
 	protected static final String TAG = "Util";
@@ -194,17 +200,73 @@ public class Tool extends Application{
 	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
+	
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+	public boolean isAirplaneMode(){
+		return Settings.System.getInt(getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
+	}
 
-	    /**
-	     * Workaround for bug pre-Froyo, see here for more info:
-	     * http://android-developers.blogspot.com/2011/09/androids-http-clients.html
-	     */
-	    public static void disableConnectionReuseIfNecessary() {
-	        // HTTP connection reuse which was buggy pre-froyo
-	        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
-	            System.setProperty("http.keepAlive", "false");
-	        }
-	    }
-	    
-	    
+	/**
+	 * Workaround for bug pre-Froyo, see here for more info:
+	 * http://android-developers.blogspot.com/2011/09/androids-http-clients.html
+	 */
+	public static void disableConnectionReuseIfNecessary() {
+		// HTTP connection reuse which was buggy pre-froyo
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
+			System.setProperty("http.keepAlive", "false");
+		}
+	}
+	
+	/**
+	 * Method to start an intent to make a phone call
+	 * @param number - The phone number to call
+	 */
+	public void makeCall(String number){
+		Intent phoneIntent = new Intent(Intent.ACTION_CALL);
+		phoneIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		phoneIntent.setData(Uri.parse("tel:" + number));
+		
+		try {
+			startActivity(phoneIntent);
+		} catch (ActivityNotFoundException ex) {
+			Toast.makeText(this, getResources().getString(R.string.call_failed), Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	/**
+	 * Method to start an intent to send mails
+	 * @param emails - A array of email addresses expressed in strings
+	 */
+	public void sendEmail(String [] emails){
+		Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+		emailIntent.setData(Uri.parse("mailto:"));
+		emailIntent.putExtra(Intent.EXTRA_EMAIL, emails);
+		
+		final Intent intent = Intent.createChooser(emailIntent, getResources().getString(R.string.email_app_choose));
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		
+		try {
+			startActivity(intent);
+		} catch (ActivityNotFoundException ex) {
+	         Toast.makeText(this, getResources().getString(R.string.email_failed), Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	/**
+	 * Method to start an intent to send SMS
+	 * @param numbers - A string of numbers separated by semi-colon
+	 */
+	public void sendSMS(String numbers){
+		Intent messageIntent = new Intent(Intent.ACTION_VIEW);
+		messageIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		messageIntent.setData(Uri.parse("smsto:"));
+		messageIntent.setType("vnd.android-dir/mms-sms");
+		messageIntent.putExtra("address", numbers);
+		
+		try {
+			startActivity(messageIntent);
+		} catch (ActivityNotFoundException ex) {
+			Toast.makeText(this, getResources().getString(R.string.message_failed), Toast.LENGTH_SHORT).show();
+		}
+	}
 }

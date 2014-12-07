@@ -2,6 +2,8 @@ package prince.app.ccm;
 
 import java.util.ArrayList;
 
+import prince.app.ccm.tools.Tool;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -54,7 +56,7 @@ public class Dialog_Email extends DialogFragment{
 		super.onCreateView(inflater, parent, oldState);
 		View view = inflater.inflate(R.layout.layout_dialog_call, parent, false);
 		
-		getDialog().setTitle(getResources().getString(R.string.number_choose));
+		getDialog().setTitle(getResources().getString(R.string.email_choose));
 		
 		// set the album name
 		mList = (ListView) view.findViewById(R.id.list_calldialog);
@@ -62,7 +64,6 @@ public class Dialog_Email extends DialogFragment{
 		mList.setFastScrollEnabled(true);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_multiple_choice, emailList);
 		mList.setAdapter(adapter);
-		mList.setSelection(0);
 		
 		 mList.setOnItemClickListener(new OnItemClickListener() {
 	            @Override
@@ -88,30 +89,28 @@ public class Dialog_Email extends DialogFragment{
 			@Override
 			public void onClick(View v) {
 				if (!selected.isEmpty()){
-					Intent emailIntent = new Intent(Intent.ACTION_SEND);
-					emailIntent.setData(Uri.parse("mailto:"));
-					emailIntent.setType("text/plain");
-					
 					String emails[] = new String[selected.size()];
 					int index = 0;
 					for (String arr:selected){
 						emails[index] = arr;
 						index++;
 					}
-					emailIntent.putExtra(Intent.EXTRA_EMAIL, emails);
 					
-					try {
-				         startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-				         getDialog().dismiss();
-				      } catch (android.content.ActivityNotFoundException ex) {
-				         Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.email_failed), Toast.LENGTH_SHORT).show();
-				      }
+					Tool.getInstance().sendEmail(emails);
+					getDialog().dismiss();
 				}
 			}
 		});
 		
 		
 		return view;
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle oldState){
+		super.onActivityCreated(oldState);
+		
+		mList.setSelection(0);
 	}
 	
 }

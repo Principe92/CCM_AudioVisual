@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res/prince.app.ccm"
+	android:layout_width="match_parent"
+	android:layout_height="56dp"
+	android:layout_marginBottom="8dp"
+	android:layout_marginTop="8dp" >
+
+	<prince.app.ccm.widget.CircularView
+		android:id="@+id/image_worker"
+		android:layout_width="50dp"
+		android:layout_height="50dp"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentTop="true"
+		android:layout_centerVertical="true"
+		android:layout_marginLeft="8dp"
+		android:layout_marginStart="8dp"
+		android:layout_marginTop="8dp"
+		android:contentDescription="@string/imageworker"
+		android:padding="2dp"
+		android:scaleType="centerCrop"
+		android:src="@drawable/test_image"
+		app:border="true"
+		app:border_color="@color/deeporange_500"
+		app:border_width="1dp"
+		app:selector="true"
+		app:selector_color="@color/deeporange_500" />
+
+	<prince.app.ccm.widget.CustomFont
+		android:id="@+id/text_worker_name"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerVertical="true"
+		android:layout_marginLeft="8dp"
+		android:layout_marginStart="8dp"
+		android:layout_toEndOf="@+id/image_worker"
+		android:layout_toRightOf="@+id/image_worker"
+		android:padding="4dp"
+		android:text="@string/unknown"
+		android:textSize="16sp"
+		app:typeface="Roboto-Regular.ttf" />
+
+	<ImageButton
+		android:id="@+id/btn_menu_worker"
+		style="?android:buttonBarButtonStyle"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentTop="true"
+		android:layout_centerVertical="true"
+		android:layout_marginEnd="4dp"
+		android:layout_marginRight="4dp"
+		android:layout_marginTop="8dp"
+		android:contentDescription="@string/options"
+		android:padding="2dp"
+		android:src="@drawable/ic_menu_black_24dp" />
+
+</RelativeLayout>

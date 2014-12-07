@@ -2,10 +2,7 @@ package prince.app.ccm;
 
 import prince.app.ccm.tools.ActivityBase;
 import prince.app.ccm.tools.Tool;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -21,7 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class Activity_Main extends ActivityBase implements Fragment_Turnos.WebListener, OnItemSelectedListener, 
-		Network.clickListener, Fragment_NavigationDrawer.NavigationDrawerCallbacks{
+		Fragment_NavigationDrawer.NavigationDrawerCallbacks{
 	private static final String TAG = Activity_Main.class.getSimpleName();
 	
 	// URL's
@@ -35,10 +32,10 @@ public class Activity_Main extends ActivityBase implements Fragment_Turnos.WebLi
 	private Fragment_NavigationDrawer mNavigationDrawerFragment;
 	
 	// Fragment Tags
-	private static final String WIFI_TAG = "mNoNetwork";
 	public static final String MANUAL_FRAGMENT = "manual_fragment";
 	public static final String CONTACT_FRAGMENT = "contact_fragment";
 	public static final String TURNS_FRAGMENT = "turns_fragment";
+	public static final String WORKERS_FRAGMENT = "worker_fragment";
 	
 	// Saved State KEYS
 	private static final String SAVED_CURRENT_URL = "current_url";
@@ -69,6 +66,9 @@ public class Activity_Main extends ActivityBase implements Fragment_Turnos.WebLi
 		URL_PROYECCION = sp.getString(getResources().getString(R.string.pref_proyUrl_key), "");			// get projection url
 		URL_DISCOS = sp.getString(getResources().getString(R.string.pref_discosUrl_key), "");			// get disk url
 		defaultURLKey = sp.getString(getResources().getString(R.string.pref_defaultPage_key), "");  	// get preferred first screen
+		
+	//	Task task = new Task(this);
+	//	task.execute(URL_CAMERA, false);
 		
 		// Restore value of variables from old state
 		if (savedState != null){
@@ -117,9 +117,8 @@ public class Activity_Main extends ActivityBase implements Fragment_Turnos.WebLi
 		mSpinner = (Spinner) findViewById(R.id.spinner_turnos);
 		
 		// Create an ArrayAdapter using the string array and a default spinner layout
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(	this, 
-																	android.R.layout.simple_spinner_dropdown_item, 
-																	getResources().getStringArray(R.array.array_turnos));
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(	this, 
+				R.array.array_turnos, android.R.layout.simple_spinner_item);
 		
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -193,36 +192,15 @@ public class Activity_Main extends ActivityBase implements Fragment_Turnos.WebLi
 		}
 	}
 	
-	@Override
-	public void onNetworkRetry() {
-		if (Tool.getInstance().isConnection()){
-			Fragment_Turnos webPage = Fragment_Turnos.newInstance(mPageURL);
+	public void retryConnection(View view){
+		Fragment_Turnos webPage = (Fragment_Turnos) getSupportFragmentManager().findFragmentByTag(TURNS_FRAGMENT);
+		if (webPage != null) webPage.refreshPage();
+		else {
+			webPage = Fragment_Turnos.newInstance(mPageURL);
 			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 			ft.replace(R.id.frame_layout_turnos, webPage, TURNS_FRAGMENT);
 			ft.commit();
 		}
-	}
-	
-	@Override
-	public void onNetworkCheck() {
-		try{
-			startActivityForResult(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK), Tool.CONNECT);
-		} catch(ActivityNotFoundException e){
-			
-		}
-	}
-	
-	@Override
-	public void onPageError() {
-		Network wifi = (Network) getSupportFragmentManager().findFragmentByTag(WIFI_TAG);
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		
-		if (wifi == null){
-			wifi = Network.newInstance();
-		}
-		
-		ft.replace(R.id.frame_layout_turnos, wifi, WIFI_TAG);
-		ft.commit();
 	}
 	
 	@Override
@@ -310,6 +288,17 @@ public class Activity_Main extends ActivityBase implements Fragment_Turnos.WebLi
 				Fragment_Contacts fg = (Fragment_Contacts) mg.findFragmentByTag(CONTACT_FRAGMENT);
 				if (fg == null) fg = Fragment_Contacts.newInstance();
 				ft.replace(R.id.frame_layout_turnos, fg, CONTACT_FRAGMENT);
+				ft.commit();
+			}
+			break;
+		
+		case 3:
+			if (mNavigationLastPosition != position){
+				if (mSpinner != null) mSpinner.setVisibility(View.GONE);
+				
+				Fragment_Workers fg = (Fragment_Workers) mg.findFragmentByTag(WORKERS_FRAGMENT);
+				if (fg == null) fg = Fragment_Workers.newInstance();
+				ft.replace(R.id.frame_layout_turnos, fg, WORKERS_FRAGMENT);
 				ft.commit();
 			}
 			break;

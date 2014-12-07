@@ -36,7 +36,8 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
-import prince.app.ccm.tools.Task;
+import prince.app.ccm.tools.AsyncSession;
+import prince.app.ccm.tools.AsyncSession.AsyncCallback;
 import prince.app.ccm.tools.Tool;
 import prince.app.ccm.util.Util;
 import android.animation.Animator;
@@ -44,11 +45,9 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -97,13 +96,53 @@ public class Fragment_Log extends Fragment{
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
 	 */
-	private UserLoginTask mAuthTask = null;
+	private AsyncSession mAuthTask = null;
 	
 	@Override
 	public void onCreate(Bundle oldState){
 		super.onCreate(oldState);
 		
 		setRetainInstance(true);
+		
+		setUpListener();
+	}
+	
+	private void setUpListener(){
+		AsyncSession.setCallback(new AsyncCallback(){
+
+			@Override
+			public void onPostExecute(boolean result) {
+				if (result){
+					saveCredentials();
+					Tool.getInstance().modBolPref(Util.SIGN_IN, true);
+						Intent intent = new Intent(getActivity(), Activity_Main.class);
+						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						startActivity(intent);
+				}
+				
+				else{
+					if (!Tool.getInstance().isConnection()){
+						Toast.makeText(getActivity(), getResources().getString(R.string.no_connection), Toast.LENGTH_LONG).show();
+					} 
+					
+					else {
+						Toast.makeText(getActivity(), getResources().getString(R.string.user_passwd_error), Toast.LENGTH_LONG).show();	
+					}
+					
+					onCancel();
+					
+				}
+				
+			}
+
+			@Override
+			public void onCancel() {
+				mAuthTask = null;
+				showProgress(false);
+				
+			}
+			
+		});
 	}
 	
 	@Override
@@ -184,7 +223,7 @@ public class Fragment_Log extends Fragment{
 		});
 	}
 	
-	private void addFocusListener(EditText xT){
+	public void addFocusListener(EditText xT){
 		xT.setOnFocusChangeListener(new OnFocusChangeListener() {
 
             @Override
@@ -252,8 +291,8 @@ public class Fragment_Log extends Fragment{
 			// Show a progress spinner, and kick off a background task to
 			// perform the user login attempt.
 			showProgress(true);
-			mAuthTask = new UserLoginTask();
-			mAuthTask.execute((Void) null);
+			mAuthTask = new AsyncSession( mUserEditText.getText().toString().trim(),  mPasswordEditText.getText().toString().trim());
+			mAuthTask.execute();
 		}
 	}
 	
@@ -345,6 +384,8 @@ public class Fragment_Log extends Fragment{
 	            // Execute HTTP Post Request
 	            mResponse = mHttpClient.execute(mHttpPost, httpcontext);
 	            
+	            Log.e(TAG, mResponse.getAllHeaders().toString());
+	            
 	            String responseString = EntityUtils.toString(mResponse.getEntity());
 	            InputStream mResponseStream = new ByteArrayInputStream(responseString.getBytes(HTTP.UTF_8));
 	            BufferedReader br = new BufferedReader(new InputStreamReader(mResponseStream));
@@ -378,11 +419,11 @@ public class Fragment_Log extends Fragment{
 			
 			else{
 				if (!Tool.getInstance().isConnection()){
-					Toast.makeText(getActivity(), "No hay conexión !", Toast.LENGTH_LONG).show();
+					Toast.makeText(getActivity(), getResources().getString(R.string.no_connection), Toast.LENGTH_LONG).show();
 				} 
 				
 				else {
-					Toast.makeText(getActivity(), "Usuario o contraseña incorrecta", Toast.LENGTH_LONG).show();	
+					Toast.makeText(getActivity(), getResources().getString(R.string.user_passwd_error), Toast.LENGTH_LONG).show();	
 				}
 				
 				onCancelled();

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+	<!-- Call -->
+	<item
+		android:id="@+id/action_pop_call"
+		android:title="@string/action_pop_call"
+		app:showAsAction="ifRoom"/>
+
+	<!-- Send SMS -->
+	<item
+		android:id="@+id/action_pop_sms"
+		android:title="@string/action_pop_sms"
+		app:showAsAction="ifRoom"/>
+
+	<!-- Send Email -->
+	<item
+		android:id="@+id/action_pop_email"
+		android:title="@string/action_pop_email"
+		app:showAsAction="ifRoom"/>
+
+	<!-- Locate -->
+	<item
+		android:id="@+id/action_pop_locate"
+		android:title="@string/action_pop_locate"
+		app:showAsAction="ifRoom"/>
+
+</menu>

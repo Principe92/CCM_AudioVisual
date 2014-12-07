@@ -1,7 +1,6 @@
 package prince.app.ccm;
 
-import android.content.Intent;
-import android.net.Uri;
+import prince.app.ccm.tools.Tool;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -13,7 +12,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * Fragment class that shows the details of a particular facebook album
@@ -21,7 +19,7 @@ import android.widget.Toast;
  *
  */
 public class Dialog_Call extends DialogFragment{
-	private static final String TAG = Dialog_Call.class.getSimpleName();
+//	private static final String TAG = Dialog_Call.class.getSimpleName();
 	private static final String LIST = "numbers";
 	private String[] numberList;
 	private int selection = -1;
@@ -82,17 +80,9 @@ public class Dialog_Call extends DialogFragment{
 			@Override
 			public void onClick(View v) {
 				if (selection != -1){
-					Intent phoneIntent = new Intent(Intent.ACTION_CALL);
-					phoneIntent.setData(Uri.parse("tel:" + numberList[selection]));
-					
-					try {
-				         startActivity(phoneIntent);
-				         getDialog().dismiss();
-				      } catch (android.content.ActivityNotFoundException ex) {
-				         Toast.makeText(getActivity(), getResources().getString(R.string.call_failed), Toast.LENGTH_SHORT).show();
-				      }
-				   }
-			}
+					Tool.getInstance().makeCall(numberList[selection]);
+					getDialog().dismiss();
+				}			}
 		});
 		
 		

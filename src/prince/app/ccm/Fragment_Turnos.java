@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -54,6 +55,8 @@ public class Fragment_Turnos extends Fragment{
 	private String mWebViewURL;
 	private WebView schedule;
 	private WebListener mCallback;
+	private ViewStub mStub;
+	private View mStubInflatedView;
 	
 	private MultiSwipeRefreshLayout mSwipeRefreshLayout;
 	private ProgressBar mProgress;
@@ -74,8 +77,6 @@ public class Fragment_Turnos extends Fragment{
 	
 	// Container Activity must implement this interface
     public interface WebListener {
-        /** Detects when an error occurred while downloading page*/
-        public void onPageError();
         
         public String onPageStarted();
     }
@@ -125,13 +126,11 @@ public class Fragment_Turnos extends Fragment{
         // Initialize the WebView
 		schedule = (WebView) view.findViewById(R.id.text_audio_main);
 	    schedule.getSettings().setSupportZoom(true);
-	    schedule.getSettings().setBuiltInZoomControls(true);
-	    schedule.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-	    schedule.setScrollbarFadingEnabled(true);
-	    schedule.getSettings().setLoadsImagesAutomatically(true);
 	    
 		WebSettings settings = schedule.getSettings();
 		settings.setDefaultTextEncodingName(ENCODING);
+		
+		mStub = (ViewStub) view.findViewById(R.id.stub_internet);
 	}
 	
     @Override
@@ -169,7 +168,7 @@ public class Fragment_Turnos extends Fragment{
 			
 			public void onPageFinished(WebView view, String url){	
 		        // Stop the refreshing indicator
-		        mSwipeRefreshLayout.setRefreshing(false);
+				mSwipeRefreshLayout.setRefreshing(false);
 		        
 		        // show the webView
 				schedule.setVisibility(View.VISIBLE);
@@ -179,7 +178,8 @@ public class Fragment_Turnos extends Fragment{
 			}
 			
 			public void onReceivedError(WebView view, int errorCod, String description, String failingUrl) {
-	            mCallback.onPageError();
+	           // mCallback.onPageError();
+				handleError();
 	        }
 		});
         
@@ -200,6 +200,13 @@ public class Fragment_Turnos extends Fragment{
 	}
 	
 	public void refreshPage(){
+		if (mStubInflatedView != null && mStubInflatedView.getVisibility() == View.VISIBLE) mStubInflatedView.setVisibility(View.GONE);
+		
 		schedule.reload();
+	}
+	
+	public void handleError(){
+		if (mStubInflatedView != null) mStubInflatedView.setVisibility(View.VISIBLE);
+		else mStubInflatedView = mStub.inflate();
 	}
 }
